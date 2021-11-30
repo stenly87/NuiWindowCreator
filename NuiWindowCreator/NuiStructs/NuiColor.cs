@@ -1,6 +1,6 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
-    public class NuiColor
+    public class NuiColor : NuiStruct
     {
         public byte a;
         public byte r;

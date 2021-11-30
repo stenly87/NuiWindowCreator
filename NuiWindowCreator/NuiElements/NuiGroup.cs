@@ -4,7 +4,7 @@ namespace NuiWindowCreator.NuiElements
 {
     public partial class NuiGroup : NuiElement, IHaveChildrens
     {
-        public List<NuiElement> children { get; set; } = new List<NuiElement>();
+        public List<INui> children { get; set; } = new List<INui>();
         public bool border;
         public NuiScrollbars scrollbars;
         public NuiGroup()
@@ -13,7 +13,7 @@ namespace NuiWindowCreator.NuiElements
             border = true;
             scrollbars = NuiScrollbars.AUTO;
         }
-        public bool AddChildren(NuiElement child)
+        public bool AddChildren(INui child)
         {
             if (children.Count > 0)
                 return false;
@@ -21,9 +21,15 @@ namespace NuiWindowCreator.NuiElements
             children.Add(child);
             return true;
         }
-        public void RemoveChildren(NuiElement child)
+        public void RemoveChildren(INui child)
         {
             children.Remove(child);
+        }
+
+        public void ReplaceChildren(INui oldChild, INui newChild)
+        {
+            int index = children.IndexOf(oldChild);
+            children[index] = newChild;
         }
     }
 }

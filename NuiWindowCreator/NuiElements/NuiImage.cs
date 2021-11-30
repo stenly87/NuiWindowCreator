@@ -2,8 +2,11 @@
 {
     public class NuiImage : NuiElement
     {
+        [NuiBindable(typeof(int))]
         public object image_aspect;
+        [NuiBindable(typeof(int))]
         public object image_halign;
+        [NuiBindable(typeof(int))]
         public object image_valign;
 
         public NuiImage()

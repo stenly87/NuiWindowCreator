@@ -1,22 +1,29 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace NuiWindowCreator.NuiElements
 {
     public class NuiCol : NuiElement, IHaveChildrens
     {
-        public List<NuiElement> children { get; set; } = new List<NuiElement>();
+        public List<INui> children { get; set; } = new List<INui>();
         public NuiCol()
         {
             type = "col";
         }
-        public bool AddChildren(NuiElement child)
+        public bool AddChildren(INui child)
         {
             children.Add(child);
             return true;
         }
-        public void RemoveChildren(NuiElement child)
+        public void RemoveChildren(INui child)
         {
             children.Remove(child);
+        }
+
+        public void ReplaceChildren(INui oldChild, INui newChild)
+        {
+            int index = children.IndexOf(oldChild);
+            children[index] = newChild;
         }
     }
 }

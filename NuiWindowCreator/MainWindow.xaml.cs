@@ -1,7 +1,10 @@
-﻿using NuiWindowCreator.NuiElements;
+﻿using Microsoft.Win32;
+using NuiWindowCreator.NuiElements;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +17,14 @@ namespace NuiWindowCreator
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         static ContextMenu contextMenu = new ContextMenu();
+        public string Json {
+            get => json;
+            set
+            {
+                json = value;
+                SignalChanged();
+            }
+        }
         public List<CustomTreeViewItem> Elements { get; set; } = new List<CustomTreeViewItem>();
 
         private CustomTreeViewItem selectedElement;
@@ -32,6 +43,8 @@ namespace NuiWindowCreator
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
         NuiWindow nui = new NuiWindow();
+        private string json;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,7 +60,7 @@ namespace NuiWindowCreator
             var variants = new string[] { "NuiCol", "NuiRow", "NuiGroup",
                 "NuiSpacer", "NuiLabel", "NuiText", "NuiButton", "NuiButtonImage", "NuiButtonSelect",
                 "NuiCheck", "NuiImage" , "NuiCombo", "NuiSlider","NuiProgress","NuiTextEdit",
-                "NuiList", "NuiListTemplateCell", "NuiColorPicker", "NuiOptions"
+                "NuiList", "NuiColorPicker", "NuiOptions"
             };
 
             foreach (var v in variants)
@@ -68,18 +81,58 @@ namespace NuiWindowCreator
             }
             contextMenu.Items.Add(menuAdd);
             var menuRemove = new MenuItem { Header = "Удалить" };
-            menuRemove.Click += MenuRemove_Click; ;
+            menuRemove.Click += MenuRemove_Click;
             contextMenu.Items.Add(menuRemove);
         }
 
         private void MenuRemove_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+
+            var child = SelectedElement;
+            var parent = (CustomTreeViewItem)SelectedElement.Parent;
+            parent.Items.Remove(child);
+
+            if (parent.NuiElement is NuiWindow window)
+                window.root = new NullElement();
+            else if (parent.NuiElement is NuiList list)
+                list.RemoveTemplateCell(child.NuiElement);
+            else
+                ((IHaveChildrens)parent.NuiElement).RemoveChildren(child.NuiElement);
         }
 
         private void MenuPack_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+
+            string elementName = ((MenuItem)e.Source).Header.ToString();
+            IHaveChildrens element = Nui.GetElementByName(elementName) as IHaveChildrens;
+            if (element == null)
+                return;
+
+            var child = SelectedElement;
+            element.AddChildren(child.NuiElement);
+
+            var parent = (CustomTreeViewItem)SelectedElement.Parent;
+
+            if (parent.NuiElement is NuiWindow window)
+                window.root = element;
+            else if (parent.NuiElement is NuiList list)
+                list.ReplaceTemplateCell(child.NuiElement, element);
+            else
+                ((IHaveChildrens)parent.NuiElement).ReplaceChildren(child.NuiElement, element);
+            var index = parent.Items.IndexOf(child);
+            var node = new CustomTreeViewItem { Header = element.GetType().Name, ContextMenu = contextMenu, NuiElement = element, IsExpanded = true };
+            parent.Items[index] = node;
+            node.Items.Add(child);
+            child.IsExpanded = true;
+            SignalChanged(nameof(Elements));
         }
 
         private void MenuAdd_Click(object sender, RoutedEventArgs e)
@@ -87,7 +140,7 @@ namespace NuiWindowCreator
             if (SelectedElement == null)
                 return;
 
-            if (!(SelectedElement.NuiElement is NuiWindow || selectedElement.NuiElement is IHaveChildrens))
+            if (!(SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiList || selectedElement.NuiElement is IHaveChildrens))
                 return;
 
             string elementName = ((MenuItem)e.Source).Header.ToString();
@@ -106,14 +159,18 @@ namespace NuiWindowCreator
             }
             else
             {
-                ((IHaveChildrens)SelectedElement.NuiElement).AddChildren(element);
+                if (SelectedElement.NuiElement is NuiList list)
+                    list.AddTemplateCell(element);
+                else if (!((IHaveChildrens)SelectedElement.NuiElement).AddChildren(element))
+                    return;
                 AddNode(SelectedElement, element);
             }
         }
 
-        private void AddNode(CustomTreeViewItem selectedElement, NuiElement element)
+        private void AddNode(CustomTreeViewItem selectedElement, INui element)
         {
-            selectedElement.Items.Add(new CustomTreeViewItem { Header = element.GetType().Name, ContextMenu = contextMenu, NuiElement = element });
+            var node = new CustomTreeViewItem { Header = element.GetType().Name, ContextMenu = contextMenu, NuiElement = element, IsExpanded = true };
+            selectedElement.Items.Add(node);
             selectedElement.IsExpanded = true;
             SignalChanged(nameof(Elements));
         }
@@ -121,6 +178,25 @@ namespace NuiWindowCreator
         private void OnElementSelect(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             SelectedElement = e.NewValue as CustomTreeViewItem;
+        }
+
+        private void ClickShowJson(object sender, RoutedEventArgs e)
+        {
+            Json = Nui.GetJsonFromWindow((NuiWindow)Elements.First().NuiElement);
+        }
+
+        private void ClickCopyJson(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(Json);
+        }
+
+        private void ClickSaveJson(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "resref.jui";
+            sfd.Filter = "nwn json files|*.jui|All files|*.*";
+            if (sfd.ShowDialog() == true)
+                File.WriteAllText(sfd.FileName, Json);
         }
     }
 }

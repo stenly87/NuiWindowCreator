@@ -38,6 +38,7 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -66,7 +67,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CustomTreeViewItem.cs" />
+    <Compile Include="BooleanToNotVisibilityConverter.cs" />
+    <Compile Include="NuiProperties\CustomTreeViewItem.cs" />
+    <Compile Include="Interfaces\IHaveChildrens.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -74,21 +77,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Nui.cs" />
-    <Compile Include="NuiElements\BindValue.cs" />
+    <Compile Include="NuiProperties\NuiBindableAttribute.cs" />
+    <Compile Include="NuiProperties\NuiIgnorePropertyAttribute.cs" />
+    <Compile Include="NuiProperties\NuiPropertyInfo.cs" />
+    <Compile Include="NuiStructs\BindValue.cs" />
     <Compile Include="Enums\NuiAspect.cs" />
-    <Compile Include="NuiElements\List.cs" />
+    <Compile Include="NuiElements\NuiList.cs" />
     <Compile Include="Interfaces\INui.cs" />
     <Compile Include="NuiElements\NuiButton.cs" />
     <Compile Include="NuiElements\NuiButtonImage.cs" />
     <Compile Include="NuiElements\NuiButtonSelect.cs" />
     <Compile Include="NuiElements\NuiCheck.cs" />
     <Compile Include="NuiElements\NuiCol.cs" />
-    <Compile Include="NuiElements\NuiColor.cs" />
+    <Compile Include="NuiStructs\NuiColor.cs" />
     <Compile Include="NuiElements\NuiColorPicker.cs" />
     <Compile Include="NuiElements\NuiCombo.cs" />
     <Compile Include="Enums\NuiDirection.cs" />
     <Compile Include="NuiElements\NuiElement.cs" />
-    <Compile Include="NuiElements\NuiGeometry.cs" />
+    <Compile Include="NuiStructs\NuiGeometry.cs" />
     <Compile Include="NuiElements\NuiGroup.cs" />
     <Compile Include="Enums\NuiHAlign.cs" />
     <Compile Include="NuiElements\NuiImage.cs" />
@@ -104,6 +110,8 @@
     <Compile Include="Enums\NuiVAlign.cs" />
     <Compile Include="NuiElements\NuiWindow.cs" />
     <Compile Include="NuiElements\NullElement.cs" />
+    <Compile Include="NuiStructs\NuiStruct.cs" />
+    <Compile Include="NuiProperties\NuiTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

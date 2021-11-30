@@ -2,21 +2,29 @@
 {
     public class NuiWindow : INui
     {
-        public NuiElement root;
+        [NuiIgnoreProperty]
+        public INui root;
 
+        [NuiBindable(typeof(string))]
         public object title;
+        [NuiIgnoreProperty]
         public int version = 1;
+        [NuiBindable(typeof(int))]
         public object border;
+        [NuiBindable(typeof(bool))]
         public object closable;
+        [NuiBindable(typeof(bool))]
         public object collapsed;
+        [NuiBindable(typeof(bool))]
         public object resizable;
+        [NuiBindable(typeof(bool))]
         public object transparent;
-
-        public NuiGeometry geometry;
+        [NuiBindable(typeof(NuiGeometry))]
+        public object geometry;
 
         public NuiWindow()
         {
-            geometry = new NuiGeometry();
+            geometry = new NuiGeometry(-1,-1, 0,0);
             title = "Заголовок окна";
             border = true;
             closable = true;

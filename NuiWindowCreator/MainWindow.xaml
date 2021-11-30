@@ -4,16 +4,93 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NuiWindowCreator"
+        xmlns:nui="clr-namespace:NuiWindowCreator.NuiElements"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Background="{StaticResource backgroundBlack}"
+        Title="Gem of the North Nui Creator" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:BooleanToNotVisibilityConverter x:Key="BooleanToNotVisibilityConverter"/>
+        <DataTemplate x:Key="defaultNuiTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <TextBox Text="{Binding Value}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="defaultCanBindTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox Content="Bind" IsChecked="{Binding IsBind}" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="nuiGeometryTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="NuiGeometry"/>
+                <CheckBox Grid.Column="1" IsChecked="{Binding IsBind}" x:Name="geometryBind" Content="bind"/>
+                <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Value}" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Label Grid.Row="1" Content="x" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <TextBox Grid.Row="1" Text="{Binding Value.x}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <Label Grid.Row="2" Content="y" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <TextBox Grid.Row="2" Text="{Binding Value.y}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <Label Grid.Row="3" Content="h" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <TextBox Grid.Row="3" Text="{Binding Value.h}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <Label Grid.Row="4" Content="w" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <TextBox Grid.Row="4" Text="{Binding Value.w}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+            </Grid>
+        </DataTemplate>
+        <local:NuiTemplateSelector x:Key="nuiTemplateSelector" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBox TextWrapping="Wrap"/>
-        <TreeView ItemsSource="{Binding Elements}" SelectedItemChanged="OnElementSelect" Grid.Column="1"/>
-        <ListBox ItemsSource="{Binding Properties}" DataContext="{Binding SelectedElement}" Grid.Column="2"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Json" TextAlignment="Center"/>
+        <TextBlock Grid.Column="1" Text="Window tree" TextAlignment="Center"/>
+        <TextBlock Grid.Column="2" Text="Properties" TextAlignment="Center"/>
+        <Border Grid.Row="1" Margin="3" BorderThickness="0.5" BorderBrush="White">
+            <TextBox Text="{Binding Json}"  TextWrapping="Wrap"/>
+        </Border>
+        <TreeView Grid.Row="1" ItemsSource="{Binding Elements}" SelectedItemChanged="OnElementSelect" Grid.Column="1">
+            <TreeView.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#007acc"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#3f3f46"/>
+            </TreeView.Resources>
+        </TreeView>
+        <ListBox Grid.Row="1" ItemTemplateSelector="{StaticResource nuiTemplateSelector}" ItemsSource="{Binding Properties}" DataContext="{Binding SelectedElement}" Grid.Column="2" HorizontalContentAlignment="Stretch"/>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Copy" Click="ClickCopyJson"/>
+            <Button Content="Save to file" Click="ClickSaveJson"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="Json" Click="ClickShowJson"/>
+        </StackPanel>
     </Grid>
 </Window>

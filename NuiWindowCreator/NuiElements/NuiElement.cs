@@ -1,6 +1,6 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
-    public class NuiElement
+    public class NuiElement : INui
     {
         public string id;
         public string type;

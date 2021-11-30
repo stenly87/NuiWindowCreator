@@ -2,9 +2,9 @@
 
 namespace NuiWindowCreator.NuiElements
 {
-    public partial class NuiGroup : NuiElement
+    public partial class NuiGroup : NuiElement, IHaveChildrens
     {
-        public List<NuiElement> children = new List<NuiElement>();
+        public List<NuiElement> children { get; set; } = new List<NuiElement>();
         public bool border;
         public NuiScrollbars scrollbars;
         public NuiGroup()
@@ -12,6 +12,18 @@ namespace NuiWindowCreator.NuiElements
             type = "group";
             border = true;
             scrollbars = NuiScrollbars.AUTO;
+        }
+        public bool AddChildren(NuiElement child)
+        {
+            if (children.Count > 0)
+                return false;
+
+            children.Add(child);
+            return true;
+        }
+        public void RemoveChildren(NuiElement child)
+        {
+            children.Remove(child);
         }
     }
 }

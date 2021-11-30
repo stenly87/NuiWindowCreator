@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBox TextWrapping="Wrap"/>
+        <TreeView ItemsSource="{Binding Elements}" SelectedItemChanged="OnElementSelect" Grid.Column="1"/>
+        <ListBox ItemsSource="{Binding Properties}" DataContext="{Binding SelectedElement}" Grid.Column="2"/>
     </Grid>
 </Window>

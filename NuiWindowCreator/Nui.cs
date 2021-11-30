@@ -9,15 +9,23 @@ using System.Threading.Tasks;
 
 namespace NuiWindowCreator
 {
-    public static class Nui
+    internal static class Nui
     {
-        public static string GetJsonFromWindow(NuiWindow window)
+        internal static string GetJsonFromWindow(NuiWindow window)
         {
             return JsonConvert.SerializeObject(window, 
                 new JsonSerializerSettings {
                     Formatting = Formatting.Indented,
                     NullValueHandling = NullValueHandling.Ignore 
                 });
+        }
+
+        internal static NuiElement GetElementByName(string elementName)
+        {
+            var type = System.Reflection.Assembly.GetExecutingAssembly().GetType($"NuiWindowCreator.NuiElements.{elementName}");
+            if (type == null)
+                return null;
+            return (NuiElement)Activator.CreateInstance(type);
         }
     }
 }

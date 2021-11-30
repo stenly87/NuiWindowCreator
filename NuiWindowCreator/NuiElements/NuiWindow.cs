@@ -1,6 +1,6 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
-    public class NuiWindow
+    public class NuiWindow : INui
     {
         public NuiElement root;
 

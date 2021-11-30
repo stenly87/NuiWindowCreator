@@ -1,7 +1,7 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
-    public class BindValue<T>
+    public class BindValue
     {
-        public T bind;
+        public string bind;
     }
 }

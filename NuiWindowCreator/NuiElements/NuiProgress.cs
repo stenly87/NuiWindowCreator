@@ -2,10 +2,12 @@
 {
     public class NuiProgress : NuiElement
     {
+        [NuiBindable(typeof(float))]
+        public new object value;
         public NuiProgress()
         {
             type = "progress";
-            value = 0.0;
+            value = new BindValue { bind = "progress_value" };
         }
     }
 }

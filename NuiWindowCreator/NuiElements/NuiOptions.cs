@@ -9,7 +9,7 @@ namespace NuiWindowCreator.NuiElements
         public NuiOptions()
         {
             type = "options";
-            value = 0;
+            value = new BindValue { bind = "options_selected_index"};
         }
     }
 

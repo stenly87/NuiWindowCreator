@@ -11,7 +11,7 @@
         public NuiSlider()
         {
             type = "slider";
-            value = 0;
+            value = new BindValue { bind = "slider_value"};
         }
     }
 }

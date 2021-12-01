@@ -2,7 +2,7 @@
 {
     public class NuiTextEdit : NuiElement
     {
-        public int multiline = 1;
+        public bool multiline = true;
         public int max = 65535;
         public NuiTextEdit()
         {

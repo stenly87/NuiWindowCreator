@@ -17,8 +17,10 @@ namespace NuiWindowCreator
             fieldInfo = s;
             iNui = nuiElement;
             bindAttribute = (NuiBindableAttribute[])fieldInfo?.GetCustomAttributes(typeof(NuiBindableAttribute), false);
-            if(IsBindable)
+            if (IsBindable)
                 typeConverter = TypeDescriptor.GetConverter(bindAttribute.First().TargetType);
+            else 
+                typeConverter = TypeDescriptor.GetConverter(fieldInfo.FieldType);
             IsBind = v is BindValue;
         }
         public string Name { get; set; }
@@ -41,28 +43,28 @@ namespace NuiWindowCreator
                 {
                     if (IsBind)
                     {
-                        if (Value is NuiStruct nuiStruct || value.ToString().Contains("System."))
-                        {   
+                        if (Value is NuiStruct || Value is Enum || value.ToString().Contains("System."))
+                        {
                             oldValue = Value;
                             value = "bind_name";
                         }
                         value = new BindValue { bind = value.ToString() };
                     }
-                    else if (IsBindable && typeConverter != null)
+                    else if (IsBindable && oldValue != null)
                     {
-                        if (oldValue != null)
-                            value = oldValue;
-                        else
+                        value = oldValue;
+                    }
+                    if (value is string && typeConverter != null)
+                    {
+                        var str = value.ToString().Replace("\"", "");
+                        try
                         {
-                            var str = value.ToString().Replace("\"", "");
-                            try
-                            {
-                                value = typeConverter.ConvertFromString(str);
-                            }
-                            catch
-                            {
-                                lastSetError = true;
-                            }
+                            value = typeConverter.ConvertFromString(str);
+                        }
+                        catch
+                        {
+                            lastSetError = true;
+                            return;
                         }
                     }
                 }

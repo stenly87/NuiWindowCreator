@@ -67,8 +67,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BooleanToNotVisibilityConverter.cs" />
-    <Compile Include="NuiProperties\CustomTreeViewItem.cs" />
+    <Compile Include="Wpf\ArrayComboEntryConverter.cs" />
+    <Compile Include="Wpf\BooleanToNotVisibilityConverter.cs" />
+    <Compile Include="Wpf\CustomTreeViewItem.cs" />
     <Compile Include="Interfaces\IHaveChildrens.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -111,7 +112,7 @@
     <Compile Include="NuiElements\NuiWindow.cs" />
     <Compile Include="NuiElements\NullElement.cs" />
     <Compile Include="NuiStructs\NuiStruct.cs" />
-    <Compile Include="NuiProperties\NuiTemplateSelector.cs" />
+    <Compile Include="Wpf\NuiTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

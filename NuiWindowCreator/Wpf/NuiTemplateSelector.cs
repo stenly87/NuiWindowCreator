@@ -14,6 +14,7 @@ namespace NuiWindowCreator
         DataTemplate defaultTemplate;
         DataTemplate nuiGeometryTemplate;
         DataTemplate defaultCanBindTemplate;
+        DataTemplate nuiComboEntrysTemplate;
 
         public NuiTemplateSelector()
         {
@@ -22,6 +23,7 @@ namespace NuiWindowCreator
             defaultTemplate = window.FindResource("defaultNuiTemplate") as DataTemplate;
             nuiGeometryTemplate = window.FindResource("nuiGeometryTemplate") as DataTemplate;
             defaultCanBindTemplate = window.FindResource("defaultCanBindTemplate") as DataTemplate;
+            nuiComboEntrysTemplate = window.FindResource("nuiComboEntrysTemplate") as DataTemplate;
         }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
@@ -30,6 +32,8 @@ namespace NuiWindowCreator
             {
                 if (prop.Value is NuiGeometry)
                     return nuiGeometryTemplate;
+                else if (prop.Value is List<object[]>)
+                    return nuiComboEntrysTemplate;
                 else if (prop.IsBindable)
                     return defaultCanBindTemplate;
                 else

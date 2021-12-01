@@ -6,9 +6,10 @@ namespace NuiWindowCreator.NuiElements
 {
     public class NuiList : NuiElement
     {
+        [NuiIgnoreProperty]
         public List<object[]> row_template = new List<object[]>();
         [NuiBindable(typeof(int))]
-        public object row_count = 0;
+        public object row_count = new BindValue { bind = "list_row_count" };
         public float row_height = 25.0f;
         public NuiList()
         {

@@ -1,4 +1,6 @@
 ﻿using NuiWindowCreator.NuiElements;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -6,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace NuiWindowCreator
 {
-    public class NuiPropertyInfo : INotifyPropertyChanged
+    public class NuiPropertyInfo : INotifyPropertyChanged, IDataErrorInfo
     {
         public NuiPropertyInfo(string name, object v, FieldInfo s, INui nuiElement)
         {
@@ -17,10 +19,12 @@ namespace NuiWindowCreator
             bindAttribute = (NuiBindableAttribute[])fieldInfo?.GetCustomAttributes(typeof(NuiBindableAttribute), false);
             if(IsBindable)
                 typeConverter = TypeDescriptor.GetConverter(bindAttribute.First().TargetType);
+            IsBind = v is BindValue;
         }
         public string Name { get; set; }
 
-        NuiStruct oldValue;
+        object oldValue;
+        bool lastSetError = false;
         public object Value
         {
             get
@@ -32,20 +36,34 @@ namespace NuiWindowCreator
             }
             set
             {
-                if (IsBind)
+                lastSetError = false;
+                if (value != null)
                 {
-                    if (Value is NuiStruct nuiStruct)
-                        oldValue = nuiStruct;
-                    value = new BindValue { bind = value.ToString() };
-                }
-                else if (IsBindable && typeConverter != null)
-                {
-                    if (oldValue != null)
-                        value = oldValue;
-                    else
+                    if (IsBind)
                     {
-                        var str = value.ToString().Replace("\"", "");
-                        value = typeConverter.ConvertFromString(str);
+                        if (Value is NuiStruct nuiStruct || value.ToString().Contains("System."))
+                        {   
+                            oldValue = Value;
+                            value = "bind_name";
+                        }
+                        value = new BindValue { bind = value.ToString() };
+                    }
+                    else if (IsBindable && typeConverter != null)
+                    {
+                        if (oldValue != null)
+                            value = oldValue;
+                        else
+                        {
+                            var str = value.ToString().Replace("\"", "");
+                            try
+                            {
+                                value = typeConverter.ConvertFromString(str);
+                            }
+                            catch
+                            {
+                                lastSetError = true;
+                            }
+                        }
                     }
                 }
                 fieldInfo?.SetValue(iNui, value);
@@ -61,6 +79,23 @@ namespace NuiWindowCreator
             {
                 isBind = value;
                 Value = Value;
+            }
+        }
+
+        public string Error => throw new System.NotImplementedException();
+
+        public string this[string columnName]
+        {
+            get {
+                string error = String.Empty;
+                switch (columnName)
+                {
+                    case "Value":
+                        if (!IsBind && IsBindable && lastSetError)
+                            error = $"Invalid Value for {Name}";
+                        break;
+                }
+                return error;
             }
         }
 

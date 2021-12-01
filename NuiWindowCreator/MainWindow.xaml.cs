@@ -140,7 +140,8 @@ namespace NuiWindowCreator
             if (SelectedElement == null)
                 return;
 
-            if (!(SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiList || selectedElement.NuiElement is IHaveChildrens))
+            if (!(SelectedElement.NuiElement is NuiWindow ||
+                SelectedElement.NuiElement is NuiList || selectedElement.NuiElement is IHaveChildrens))
                 return;
 
             string elementName = ((MenuItem)e.Source).Header.ToString();

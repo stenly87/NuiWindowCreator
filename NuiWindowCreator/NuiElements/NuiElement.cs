@@ -6,7 +6,7 @@
         [NuiIgnoreProperty]
         public string type;
         [NuiBindable(typeof(string))]
-        public object label;
+        public object label = "";
         [NuiBindable(typeof(string))]
         public object value;
         [NuiBindable(typeof(string))]

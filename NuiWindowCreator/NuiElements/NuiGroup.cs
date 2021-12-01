@@ -4,6 +4,7 @@ namespace NuiWindowCreator.NuiElements
 {
     public partial class NuiGroup : NuiElement, IHaveChildrens
     {
+        [NuiIgnoreProperty]
         public List<INui> children { get; set; } = new List<INui>();
         public bool border;
         public NuiScrollbars scrollbars;

@@ -9,7 +9,7 @@
         public object title;
         [NuiIgnoreProperty]
         public int version = 1;
-        [NuiBindable(typeof(int))]
+        [NuiBindable(typeof(bool))]
         public object border;
         [NuiBindable(typeof(bool))]
         public object closable;
@@ -24,7 +24,7 @@
 
         public NuiWindow()
         {
-            geometry = new NuiGeometry(-1,-1, 0,0);
+            geometry = new NuiGeometry(-1, -1, 300, 300);
             title = "Заголовок окна";
             border = true;
             closable = true;

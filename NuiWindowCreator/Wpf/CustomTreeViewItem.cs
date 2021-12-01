@@ -10,14 +10,16 @@ namespace NuiWindowCreator
 {
     public class CustomTreeViewItem : TreeViewItem
     {
+        IEnumerable<NuiPropertyInfo> nuiPropertyInfos;
         public IEnumerable<NuiPropertyInfo> Properties {
 
             get
             {
-                var props = NuiElement?.GetType().GetFields().
+                if (nuiPropertyInfos == null)
+                    nuiPropertyInfos = NuiElement?.GetType().GetFields().
                     Select(s => new NuiPropertyInfo(s.Name, s.GetValue(NuiElement), s, NuiElement)).
                     Where(s => s.fieldInfo.GetCustomAttributes(typeof(NuiIgnorePropertyAttribute), false).Length == 0);
-                return props;
+                return nuiPropertyInfos;
             }
         }
 

@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
     public class NuiCombo : NuiElement
     {
-        public List<object[]> elements = new List<object[]>();
+        [NuiBindable(typeof(List<object[]>))]
+        public object elements = new List<object[]>();
+
+        [NuiBindable(typeof(int))]
+        public new object value = new BindValue { bind = "combo_selected_index" };
         public NuiCombo()
         {
             type = "combo";
             value = 0;
-        }
-
-        public void AddElement(NuiElement nuiElement)
-        {
-            elements.Add(new object[] { nuiElement, elements.Count + 1});
         }
     }
 }

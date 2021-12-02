@@ -59,6 +59,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NuiProperties\ErrorProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindBoolProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindFloatProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindGeometryProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindIntProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindStringProperty.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,8 +74,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Wpf\ArrayComboEntryConverter.cs" />
-    <Compile Include="Wpf\BooleanToNotVisibilityConverter.cs" />
+    <Compile Include="NuiProperties\INuiProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleBoolProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleFloatProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleIntProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleStringProperty.cs" />
+    <Compile Include="NuiProperties\PropertyFactory.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleProperty.cs" />
+    <Compile Include="Wpf\ConverterInvertBool.cs" />
     <Compile Include="Wpf\CustomTreeViewItem.cs" />
     <Compile Include="Interfaces\IHaveChildrens.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -78,9 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Nui.cs" />
-    <Compile Include="NuiProperties\NuiBindableAttribute.cs" />
-    <Compile Include="NuiProperties\NuiIgnorePropertyAttribute.cs" />
-    <Compile Include="NuiProperties\NuiPropertyInfo.cs" />
+    <Compile Include="NuiProperties\Attributes\NuiBindableAttribute.cs" />
+    <Compile Include="NuiProperties\Attributes\NuiIgnorePropertyAttribute.cs" />
     <Compile Include="NuiStructs\BindValue.cs" />
     <Compile Include="Enums\NuiAspect.cs" />
     <Compile Include="NuiElements\NuiList.cs" />
@@ -112,7 +124,6 @@
     <Compile Include="NuiElements\NuiWindow.cs" />
     <Compile Include="NuiElements\NullElement.cs" />
     <Compile Include="NuiStructs\NuiStruct.cs" />
-    <Compile Include="Wpf\NuiTemplateSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

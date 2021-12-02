@@ -4,98 +4,135 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NuiWindowCreator"
-        xmlns:nui="clr-namespace:NuiWindowCreator.NuiElements"
+        xmlns:nui="clr-namespace:NuiWindowCreator.NuiProperties"
         mc:Ignorable="d"
         Background="{StaticResource backgroundBlack}"
         Title="Gem of the North Nui Creator" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <local:BooleanToNotVisibilityConverter x:Key="BooleanToNotVisibilityConverter"/>
-        <local:ArrayComboEntryConverter x:Key="ArrayComboEntryConverter"/>
-        <DataTemplate x:Key="nuiComboEntrysTemplate">
+        <DataTemplate DataType="{x:Type nui:NuiSimpleIntProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <TextBox Text="{Binding Value}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiSimpleBoolProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <TextBox Text="{Binding Value}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiSimpleFloatProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <TextBox Text="{Binding Value}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiSimpleStringProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <TextBox Text="{Binding Value}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiBindStringProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="65"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Content="{Binding Name}"/>
-                <CheckBox Content="Bind" IsChecked="{Binding IsBind}" Grid.Column="1"/>
-                <TextBox TextWrapping="Wrap" Grid.Column="2" AcceptsReturn="True">
-                    <TextBox.Text>
-                        <MultiBinding Converter="{StaticResource ArrayComboEntryConverter}">
-                            <Binding Path="Value"/>
-                            <Binding Path="IsBind"/>
-                        </MultiBinding>
-                    </TextBox.Text>
-                </TextBox>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="defaultNuiTemplate">
+        
+        <DataTemplate DataType="{x:Type nui:NuiBindBoolProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Label Content="{Binding Name}"/>
-                <TextBox Grid.Column="1">
-                    <TextBox.Text>
-                        <Binding Path="Value">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule  />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </Grid>
-        </DataTemplate>
-        <DataTemplate x:Key="defaultCanBindTemplate">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="65"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Content="{Binding Name}"/>
-                <CheckBox Content="Bind" IsChecked="{Binding IsBind}" Grid.Column="1"/>
-                <TextBox Grid.Column="2">
-                    <TextBox.Text>
-                        <Binding Path="Value">
-                            <Binding.ValidationRules>
-                                <DataErrorValidationRule  />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="nuiGeometryTemplate">
+        <DataTemplate DataType="{x:Type nui:NuiBindIntProperty}">
             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiBindFloatProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
+            </Grid>
+        </DataTemplate>
+        <local:ConverterInvertBool x:Key="converterInvertBool"/>
+        <DataTemplate DataType="{x:Type nui:NuiBindGeometryProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Label Content="NuiGeometry"/>
-                <CheckBox Grid.Column="1" IsChecked="{Binding IsBind}" x:Name="geometryBind" Content="bind"/>
-                <TextBox Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Value}" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <Label Grid.Row="1" Content="x" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <TextBox Grid.Row="1" Text="{Binding Value.x}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <Label Grid.Row="2" Content="y" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <TextBox Grid.Row="2" Text="{Binding Value.y}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <Label Grid.Row="3" Content="h" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <TextBox Grid.Row="3" Text="{Binding Value.h}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <Label Grid.Row="4" Content="w" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
-                <TextBox Grid.Row="4" Text="{Binding Value.w}" Grid.Column="1" Visibility="{Binding ElementName=geometryBind, Path=IsChecked, Converter={StaticResource BooleanToNotVisibilityConverter}}" />
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" x:Name="isBindGeometryCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                <TextBox Text="{Binding BindVar}" IsEnabled="{Binding ElementName=isBindGeometryCheck, Path=IsChecked}" Grid.Row="1" Grid.Column="1"/>
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2" IsEnabled="{Binding ElementName=isBindGeometryCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="x"/>
+                        <TextBox Text="{Binding X}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="y"/>
+                        <TextBox Text="{Binding Y}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="h"/>
+                        <TextBox Text="{Binding H}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="w"/>
+                        <TextBox Text="{Binding W}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
         </DataTemplate>
-        <local:NuiTemplateSelector x:Key="nuiTemplateSelector" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -108,24 +145,40 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
         <TextBlock Text="Json" TextAlignment="Center"/>
         <TextBlock Grid.Column="1" Text="Window tree" TextAlignment="Center"/>
         <TextBlock Grid.Column="2" Text="Properties" TextAlignment="Center"/>
+        
         <Border Grid.Row="1" Margin="3" BorderThickness="0.5" BorderBrush="White">
             <TextBox Text="{Binding Json}"  TextWrapping="Wrap"/>
         </Border>
-        <TreeView Grid.Row="1" ItemsSource="{Binding Elements}" SelectedItemChanged="OnElementSelect" Grid.Column="1">
+        <TreeView Grid.Row="1" 
+                  ItemsSource="{Binding Elements}" 
+                  SelectedItemChanged="OnElementSelect" 
+                  Grid.Column="1">
             <TreeView.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#007acc"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#3f3f46"/>
             </TreeView.Resources>
         </TreeView>
-        <ListBox Grid.Row="1" ItemTemplateSelector="{StaticResource nuiTemplateSelector}" ItemsSource="{Binding Properties}" DataContext="{Binding SelectedElement}" Grid.Column="2" HorizontalContentAlignment="Stretch"/>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+        <ListBox Grid.Row="1" 
+                 ItemsSource="{Binding Properties}" 
+                 DataContext="{Binding SelectedElement}" 
+                 
+                 Grid.Column="2" 
+                 HorizontalContentAlignment="Stretch"/>
+        
+        <StackPanel Grid.Row="2" 
+                    HorizontalAlignment="Center" 
+                    Orientation="Horizontal">
             <Button Content="Copy" Click="ClickCopyJson"/>
             <Button Content="Save to file" Click="ClickSaveJson"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" 
+                    Grid.Column="1" 
+                    HorizontalAlignment="Center" 
+                    Orientation="Horizontal">
             <Button Content="Json" Click="ClickShowJson"/>
         </StackPanel>
     </Grid>

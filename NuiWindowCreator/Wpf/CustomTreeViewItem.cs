@@ -1,6 +1,8 @@
 ﻿using NuiWindowCreator.NuiElements;
+using NuiWindowCreator.NuiProperties;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +12,17 @@ namespace NuiWindowCreator
 {
     public class CustomTreeViewItem : TreeViewItem
     {
-        IEnumerable<NuiPropertyInfo> nuiPropertyInfos;
-        public IEnumerable<NuiPropertyInfo> Properties {
-
+        ObservableCollection<NuiProperty> nuiPropertyInfos;
+        public IEnumerable<NuiProperty> Properties
+        {
             get
             {
                 if (nuiPropertyInfos == null)
-                    nuiPropertyInfos = NuiElement?.GetType().GetFields().
+                    nuiPropertyInfos = new ObservableCollection<NuiProperty>(
+                        NuiElement?.GetType().GetFields().
                         Where(s => s.GetCustomAttributes(typeof(NuiIgnorePropertyAttribute), false).Length == 0).
-                        Select(s => new NuiPropertyInfo(s.Name, s.GetValue(NuiElement), s, NuiElement));
+                        Select(s => PropertyFactory.GetPropertyFromType(s, NuiElement))
+                        );
                 return nuiPropertyInfos;
             }
         }

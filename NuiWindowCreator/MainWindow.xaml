@@ -15,7 +15,7 @@
         <DataTemplate x:Key="nuiComboEntrysTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="75"/>
                     <ColumnDefinition Width="65"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -34,7 +34,7 @@
         <DataTemplate x:Key="defaultNuiTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="75"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Label Content="{Binding Name}"/>
@@ -52,7 +52,7 @@
         <DataTemplate x:Key="defaultCanBindTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition Width="75"/>
                     <ColumnDefinition Width="65"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
                 <CheckBox Content="Bind" IsChecked="{Binding IsBind}" Grid.Column="1"/>
                 <TextBox Grid.Column="2">
                     <TextBox.Text>
-                        <Binding Path="Value" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="Value">
                             <Binding.ValidationRules>
                                 <DataErrorValidationRule  />
                             </Binding.ValidationRules>

@@ -17,8 +17,8 @@ namespace NuiWindowCreator
             {
                 if (nuiPropertyInfos == null)
                     nuiPropertyInfos = NuiElement?.GetType().GetFields().
-                    Select(s => new NuiPropertyInfo(s.Name, s.GetValue(NuiElement), s, NuiElement)).
-                    Where(s => s.fieldInfo.GetCustomAttributes(typeof(NuiIgnorePropertyAttribute), false).Length == 0);
+                        Where(s => s.GetCustomAttributes(typeof(NuiIgnorePropertyAttribute), false).Length == 0).
+                        Select(s => new NuiPropertyInfo(s.Name, s.GetValue(NuiElement), s, NuiElement));
                 return nuiPropertyInfos;
             }
         }

@@ -64,10 +64,10 @@ namespace NuiWindowCreator
             DataTemplate template = new DataTemplate();
             FrameworkElementFactory spGrid = new FrameworkElementFactory(typeof(Grid));
             FrameworkElementFactory spColumn = new FrameworkElementFactory(typeof(ColumnDefinition));
-            spColumn.SetValue(ColumnDefinition.WidthProperty, new GridLength(65));
+            spColumn.SetValue(ColumnDefinition.WidthProperty, new GridLength(75));
             spGrid.AppendChild(spColumn);
             spColumn = new FrameworkElementFactory(typeof(ColumnDefinition));
-            spColumn.SetValue(ColumnDefinition.WidthProperty, new GridLength(65));
+            spColumn.SetValue(ColumnDefinition.WidthProperty, new GridLength(75));
             spGrid.AppendChild(spColumn);
             spGrid.AppendChild(new FrameworkElementFactory(typeof(ColumnDefinition)));
 

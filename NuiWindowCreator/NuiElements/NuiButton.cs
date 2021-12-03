@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiButton : NuiElement
     {
         public NuiButton()

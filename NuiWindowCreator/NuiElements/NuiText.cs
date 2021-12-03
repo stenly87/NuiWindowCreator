@@ -1,5 +1,6 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiText : NuiElement
     {
         public NuiText()

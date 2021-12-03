@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public partial class NuiGroup : NuiElement, IHaveChildrens
     {
         public List<INui> children { get; set; } = new List<INui>();

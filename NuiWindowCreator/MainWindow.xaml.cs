@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using NuiWindowCreator.NuiElements;
 using NuiWindowCreator.NuiProperties;
 using System;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,7 +30,7 @@ namespace NuiWindowCreator
                 SignalChanged();
             }
         }
-        public List<CustomTreeViewItem> Elements { get; set; } = new List<CustomTreeViewItem>();
+        public ObservableCollection<CustomTreeViewItem> Elements { get; set; } = new ObservableCollection<CustomTreeViewItem>();
 
         private CustomTreeViewItem selectedElement;
         public CustomTreeViewItem SelectedElement
@@ -187,7 +189,7 @@ namespace NuiWindowCreator
             }
         }
 
-        private void AddNode(CustomTreeViewItem selectedElement, INui element)
+        private CustomTreeViewItem AddNode(CustomTreeViewItem selectedElement, INui element)
         {
             var node = new CustomTreeViewItem {
                 Header = element.GetType().Name, 
@@ -197,6 +199,7 @@ namespace NuiWindowCreator
             selectedElement.Items.Add(node);
             selectedElement.IsExpanded = true;
             SignalChanged(nameof(Elements));
+            return node;
         }
 
         private void OnElementSelect(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -253,6 +256,71 @@ namespace NuiWindowCreator
                 if (win.ShowDialog() == true)
                 {
                     propArray.Values = new ObservableCollection<StringEntry>(win.Values);
+                }
+            }
+        }
+
+        private void ClickSaveBinary(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = "resref.nui";
+            sfd.Filter = "project files|*.nui";
+            if (sfd.ShowDialog() == true)
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                using (var fs = File.Create(sfd.FileName))
+                    bin.Serialize(fs, nui);
+            }
+        }
+
+        private void ClickLoadBinary(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog sfd = new OpenFileDialog();
+            sfd.FileName = "resref.nui";
+            sfd.Filter = "project files|*.nui";
+            if (sfd.ShowDialog() == true)
+            {
+                BinaryFormatter bin = new BinaryFormatter();
+                try
+                {
+                    using (var fs = File.OpenRead(sfd.FileName))
+                        nui = (NuiWindow)bin.Deserialize(fs);
+                    ReloadTree();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void ReloadTree()
+        {
+            Elements.Clear();
+            var root = new CustomTreeViewItem { Header = nui.GetType().Name, ContextMenu = contextMenu, NuiElement = nui };
+            var nextNode = AddNode(root, nui.root);
+            BuildTree(nui.root, nextNode);
+            Elements.Add(root);
+            SignalChanged(nameof(Elements));
+        }
+
+        private void BuildTree(INui root, CustomTreeViewItem rootNode)
+        {
+            if (root is IHaveChildrens parent)
+            {
+                foreach (var item in parent.children)
+                {
+                    var nextNode = AddNode(rootNode, item);
+                    BuildTree(item, nextNode);
+                }
+            }
+            else if (nui.root is NuiList nuiList)
+            {
+                var childs = nuiList.GetChilds();
+                foreach (var item in childs)
+                {
+                    var nextNode = AddNode(rootNode, item);
+                    BuildTree(item, nextNode);
                 }
             }
         }

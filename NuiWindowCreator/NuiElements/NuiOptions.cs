@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiOptions : NuiElement
     {
         [GuiProperty(typeof(NuiDirectionSelectProperty))]

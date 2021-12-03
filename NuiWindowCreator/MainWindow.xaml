@@ -362,7 +362,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Text="Json" TextAlignment="Center"/>
+        <TextBox Text="Json" TextAlignment="Center"/>
         <TextBlock Grid.Column="1" Text="Window tree" TextAlignment="Center"/>
         <TextBlock Grid.Column="2" Text="Properties" TextAlignment="Center"/>
         
@@ -393,13 +393,16 @@
                     HorizontalAlignment="Center" 
                     Orientation="Horizontal">
             <Button Content="Copy" Click="ClickCopyJson"/>
-            <Button Content="Save to file" Click="ClickSaveJson"/>
+            <Button Content="Save jui" Click="ClickSaveJson"/>
         </StackPanel>
         <StackPanel Grid.Row="2" 
                     Grid.Column="1" 
                     HorizontalAlignment="Center" 
                     Orientation="Horizontal">
-            <Button Content="Json" Click="ClickShowJson"/>
+            <Button Content="Get Json" Click="ClickShowJson"/>
+            <Separator />
+            <Button Content="Save project" Click="ClickSaveBinary"/>
+            <Button Content="Load project" Click="ClickLoadBinary"/>
         </StackPanel>
     </Grid>
 </Window>

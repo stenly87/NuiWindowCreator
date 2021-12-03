@@ -1,5 +1,6 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiColor : NuiStruct
     {
         public byte a { get; set; }

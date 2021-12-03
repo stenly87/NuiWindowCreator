@@ -2,6 +2,7 @@
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiElement : INui
     {
         [GuiProperty(typeof(NuiSimpleStringProperty))]

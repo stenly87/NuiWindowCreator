@@ -2,6 +2,7 @@
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiRow : NuiElement, IHaveChildrens
     {
         public List<INui> children { get; set; } = new List<INui>();

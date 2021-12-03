@@ -1,5 +1,6 @@
 ﻿namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public enum NuiAspect
     {     
         FIT = 0,

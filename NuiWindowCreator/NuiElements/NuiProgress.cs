@@ -2,6 +2,7 @@
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiProgress : NuiElement
     {
         [GuiProperty(typeof(NuiBindFloatProperty))]

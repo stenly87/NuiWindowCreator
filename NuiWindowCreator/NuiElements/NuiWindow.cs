@@ -1,7 +1,9 @@
 ﻿using NuiWindowCreator.NuiProperties;
+using System;
 
 namespace NuiWindowCreator.NuiElements
 {
+    [Serializable]
     public class NuiWindow : INui
     {
         [NuiIgnoreProperty]

@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiList : NuiElement
     {
         [NuiIgnoreProperty]
@@ -19,7 +20,7 @@ namespace NuiWindowCreator.NuiElements
             type = "list";
         }
 
-        public void AddTemplateCell(INui nuiElement)
+        internal void AddTemplateCell(INui nuiElement)
         {
             row_template.Add(new object[] { nuiElement, 0.0f, true});
         }
@@ -35,6 +36,11 @@ namespace NuiWindowCreator.NuiElements
             var row = row_template.FirstOrDefault(s => s[0] == nuiElement);
             int index = row_template.IndexOf(row);
             row_template[index] = new object[] { element, 0.0f, true };
+        }
+
+        internal IEnumerable<INui> GetChilds()
+        {
+            return row_template.Select(s => (INui)s[0]);
         }
     }
 }

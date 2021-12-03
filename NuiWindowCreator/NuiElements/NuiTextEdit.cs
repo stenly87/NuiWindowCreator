@@ -2,6 +2,7 @@
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiTextEdit : NuiElement
     {
         [GuiProperty(typeof(NuiSimpleBoolProperty))]

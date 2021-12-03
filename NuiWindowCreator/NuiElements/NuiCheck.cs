@@ -2,6 +2,7 @@
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiCheck : NuiElement
     {
         [GuiProperty(typeof(NuiBindBoolProperty))]

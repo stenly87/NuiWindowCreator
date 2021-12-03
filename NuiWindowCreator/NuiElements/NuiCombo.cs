@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
+    [System.Serializable]
     public class NuiCombo : NuiElement
     {
         [GuiProperty(typeof(NuiComboItemsSelectProperty))]

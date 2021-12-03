@@ -2,11 +2,13 @@
 {
     public class NuiButtonSelect : NuiElement
     {
+        [NuiBindable(typeof(int))]
+        public new object value;
         public NuiButtonSelect()
         {
             type = "button_select";
             label = "Кнопка";
-            value = 0;
+            value = new BindValue {  bind = "bind_selected"};
         }
     }
 }

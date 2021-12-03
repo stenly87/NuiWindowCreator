@@ -24,7 +24,7 @@ namespace NuiWindowCreator.NuiProperties
             get => bindVar.bind; 
             set => bindVar.bind = value; 
         }
-        private BindValue bindVar = new BindValue();
+        private BindValue bindVar = new BindValue { bind = "bind_geometry" };
         public string Name { get => fieldInfo.Name; }
         NuiGeometry Geometry;
 

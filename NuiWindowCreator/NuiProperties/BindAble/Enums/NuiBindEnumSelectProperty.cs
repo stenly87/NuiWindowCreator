@@ -37,7 +37,7 @@ namespace NuiWindowCreator.NuiProperties
             get => bindVar.bind;
             set => bindVar.bind = value;
         }
-        private BindValue bindVar = new BindValue();
+        private BindValue bindVar;
 
         private FieldInfo fieldInfo;
         private INui nuiElement;
@@ -51,6 +51,7 @@ namespace NuiWindowCreator.NuiProperties
                 ToList();
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
+            bindVar = new BindValue { bind = "bind_" + Name };
 
             notBindValue = (T)fieldInfo.GetValue(nuiElement);
         }

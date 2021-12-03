@@ -2,9 +2,9 @@
 {
     public class NuiLabel : NuiElement
     {
-        [NuiBindable(typeof(int))]
+        [NuiBindable(typeof(NuiHAlign))]
         public object text_halign;
-        [NuiBindable(typeof(int))]
+        [NuiBindable(typeof(NuiVAlign))]
         public object text_valign;
         public NuiLabel()
         {

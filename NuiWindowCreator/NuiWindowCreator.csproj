@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="NuiProperties\BindAble\NuiBindBoolNullableProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindColorProperty.cs" />
     <Compile Include="NuiProperties\ErrorProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindBoolProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindFloatProperty.cs" />

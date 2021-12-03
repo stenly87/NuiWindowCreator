@@ -46,6 +46,8 @@ namespace NuiWindowCreator.NuiProperties
                     return new NuiBindFloatProperty(fieldInfo, nuiElement);
                 else if (valueType == typeof(NuiGeometry))
                     return new NuiBindGeometryProperty(fieldInfo, nuiElement);
+                else if (valueType == typeof(NuiColor))
+                    return new NuiBindColorProperty(fieldInfo, nuiElement);
                 else if (valueType == typeof(NuiAspect))
                     return new NuiAspectSelectProperty(fieldInfo, nuiElement);
                 else if (valueType == typeof(NuiVAlign))

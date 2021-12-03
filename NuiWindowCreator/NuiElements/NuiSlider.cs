@@ -8,6 +8,8 @@
         public object max = 100;
         [NuiBindable(typeof(int))]
         public object step = 1;
+        [NuiBindable(typeof(int))]
+        public new object value;
         public NuiSlider()
         {
             type = "slider";

@@ -126,6 +126,43 @@
                 <TextBox Text="{Binding Value}" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiBindColorProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" x:Name="isBindColorCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                <TextBox Text="{Binding BindVar}" 
+                         IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked}" 
+                         Grid.Row="1" Grid.Column="1"/>
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2"
+                            IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="a"/>
+                        <TextBox Text="{Binding A}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="r"/>
+                        <TextBox Text="{Binding R}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="g"/>
+                        <TextBox Text="{Binding G}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="b"/>
+                        <TextBox Text="{Binding B}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiBindGeometryProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -280,7 +317,7 @@
                   SelectedItemChanged="OnElementSelect" 
                   Grid.Column="1">
             <TreeView.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#007acc"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF444044"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#3f3f46"/>
             </TreeView.Resources>
         </TreeView>
@@ -289,7 +326,12 @@
                  DataContext="{Binding SelectedElement}" 
                  
                  Grid.Column="2" 
-                 HorizontalContentAlignment="Stretch"/>
+                 HorizontalContentAlignment="Stretch">
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
+            </ListBox.Resources>
+        </ListBox>
         
         <StackPanel Grid.Row="2" 
                     HorizontalAlignment="Center" 

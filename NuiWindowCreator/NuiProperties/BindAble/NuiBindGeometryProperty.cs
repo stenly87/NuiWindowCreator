@@ -9,7 +9,6 @@ namespace NuiWindowCreator.NuiProperties
         private INui nuiElement;
         private bool isBind;
 
-        public string Name { get => fieldInfo.Name; }
         public bool IsBind
         {
             get => isBind;
@@ -25,8 +24,9 @@ namespace NuiWindowCreator.NuiProperties
             get => bindVar.bind; 
             set => bindVar.bind = value; 
         }
-        NuiGeometry Geometry;
         private BindValue bindVar = new BindValue();
+        public string Name { get => fieldInfo.Name; }
+        NuiGeometry Geometry;
 
         public float X
         {

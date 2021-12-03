@@ -26,7 +26,7 @@ namespace NuiWindowCreator.NuiProperties
         }
 
         BindValue bindValue = new BindValue();
-        T localValue = default;
+        T localValue;
         private bool isBind;
 
         public object Value
@@ -34,9 +34,14 @@ namespace NuiWindowCreator.NuiProperties
             get => IsBind ? (object)bindValue.bind : localValue;
             set
             {
-                if (Value == null)
-                    return;
-                if (IsBind)
+                if (value == null)
+                {
+                    localValue = default(T);
+                    isBind = false;
+                    fieldInfo.SetValue(nuiElement, value);
+                    SignalChanged(nameof(IsBind));
+                }
+                else if (IsBind)
                 {
                     bindValue.bind = value.ToString();
                     fieldInfo.SetValue(nuiElement, bindValue);
@@ -61,6 +66,7 @@ namespace NuiWindowCreator.NuiProperties
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
             converter = TypeDescriptor.GetConverter(typeof(T));
+            localValue = (T)fieldInfo.GetValue(nuiElement);
         }
     }
 }

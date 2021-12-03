@@ -18,9 +18,9 @@
         public float? margin;
         public float? padding;
 
-        [NuiBindable(typeof(bool))]
+        [NuiBindable(typeof(bool?))]
         public object enabled;
-        [NuiBindable(typeof(bool))]
+        [NuiBindable(typeof(bool?))]
         public object visible;
     }
 }

@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace NuiWindowCreator.NuiProperties
 {
-    public class NuiSimpleFloatProperty : NuiSimpleProperty<float>
+    internal class NuiSimpleFloatProperty : NuiSimpleProperty<float>
     {
         public NuiSimpleFloatProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
         {

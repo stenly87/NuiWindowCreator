@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NuiProperties\BindAble\NuiBindBoolNullableProperty.cs" />
     <Compile Include="NuiProperties\ErrorProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindBoolProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindFloatProperty.cs" />
@@ -75,10 +76,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NuiProperties\INuiProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\Enums\NuiAspectSelectProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\Enums\NuiDirectionSelectProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\Enums\NuiBindEnumSelectProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\Enums\NuiEnumSelectProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\Enums\NuiHAlignSelectProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\Enums\NuiVAlignSelectProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleBoolProperty.cs" />
-    <Compile Include="NuiProperties\NotBindAble\NuiSimpleFloatProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleNullableFloatProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleIntProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleStringProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\NuiSimpleFloatProperty.cs" />
+    <Compile Include="NuiProperties\NotBindAble\Enums\NuiScrollSelectProperty.cs" />
     <Compile Include="NuiProperties\PropertyFactory.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleProperty.cs" />
     <Compile Include="Wpf\ConverterInvertBool.cs" />

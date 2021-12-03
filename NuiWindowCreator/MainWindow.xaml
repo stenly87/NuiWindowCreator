@@ -63,6 +63,64 @@
                 <TextBox Text="{Binding Value}" Grid.Column="1"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiArrayItemsSelectProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" x:Name="isBindComboEntrysCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding BindVar}"
+                         IsEnabled="{Binding ElementName=isBindComboEntrysCheck, Path=IsChecked}" 
+                         Grid.Column="2"/>
+                <ListBox Grid.Row="2" Grid.ColumnSpan="3"
+                         Height="100"
+                         DisplayMemberPath="Value"
+                         IsEnabled="{Binding ElementName=isBindComboEntrysCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}"
+                         ItemsSource="{Binding Values}">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit rows" Click="editCombo" Tag="{Binding}"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiComboItemsSelectProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" x:Name="isBindComboEntrysCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding BindVar}"
+                         IsEnabled="{Binding ElementName=isBindComboEntrysCheck, Path=IsChecked}" 
+                         Grid.Column="2"/>
+                <ListBox Grid.Row="2" Grid.ColumnSpan="3"
+                         Height="100"
+                         DisplayMemberPath="Value"
+                         IsEnabled="{Binding ElementName=isBindComboEntrysCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}"
+                         ItemsSource="{Binding Values}">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit rows" Click="editCombo" Tag="{Binding}"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+            </Grid>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiBindStringProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -75,7 +133,6 @@
                 <TextBox Text="{Binding Value}" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
-
         <DataTemplate DataType="{x:Type nui:NuiBindBoolNullableProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -310,7 +367,7 @@
         <TextBlock Grid.Column="2" Text="Properties" TextAlignment="Center"/>
         
         <Border Grid.Row="1" Margin="3" BorderThickness="0.5" BorderBrush="White">
-            <TextBox Text="{Binding Json}"  TextWrapping="Wrap"/>
+            <TextBox Text="{Binding Json}" TextWrapping="Wrap"/>
         </Border>
         <TreeView Grid.Row="1" 
                   ItemsSource="{Binding Elements}" 
@@ -324,7 +381,6 @@
         <ListBox Grid.Row="1" 
                  ItemsSource="{Binding Properties}" 
                  DataContext="{Binding SelectedElement}" 
-                 
                  Grid.Column="2" 
                  HorizontalContentAlignment="Stretch">
             <ListBox.Resources>

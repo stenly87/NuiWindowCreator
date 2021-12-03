@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NuiProperties\BindAble\NuiArrayItemsSelectProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindBoolNullableProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindColorProperty.cs" />
     <Compile Include="NuiProperties\ErrorProperty.cs" />
@@ -76,6 +77,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="NuiProperties\Attributes\GuiPropertyAttribute.cs" />
     <Compile Include="NuiProperties\INuiProperty.cs" />
     <Compile Include="NuiProperties\BindAble\Enums\NuiAspectSelectProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\Enums\NuiDirectionSelectProperty.cs" />
@@ -89,8 +91,12 @@
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleStringProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleFloatProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\Enums\NuiScrollSelectProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiComboItemsSelectProperty.cs" />
     <Compile Include="NuiProperties\PropertyFactory.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleProperty.cs" />
+    <Compile Include="WinListStringEdit.xaml.cs">
+      <DependentUpon>WinListStringEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\ConverterInvertBool.cs" />
     <Compile Include="Wpf\CustomTreeViewItem.cs" />
     <Compile Include="Interfaces\IHaveChildrens.cs" />
@@ -98,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WinListStringEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Nui.cs" />

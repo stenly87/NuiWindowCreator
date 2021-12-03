@@ -1,7 +1,10 @@
-﻿namespace NuiWindowCreator.NuiElements
+﻿using NuiWindowCreator.NuiProperties;
+
+namespace NuiWindowCreator.NuiElements
 {
     public class NuiButtonSelect : NuiElement
     {
+        [GuiProperty(typeof(NuiBindIntProperty))]
         [NuiBindable(typeof(int))]
         public new object value;
         public NuiButtonSelect()

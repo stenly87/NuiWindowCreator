@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using NuiWindowCreator.NuiProperties;
+using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
     public class NuiOptions : NuiElement
     {
+        [GuiProperty(typeof(NuiDirectionSelectProperty))]
         public NuiDirection direction = NuiDirection.HORIZONTAL;
-        public List<string> elements = new List<string>();
+        [GuiProperty(typeof(NuiArrayItemsSelectProperty))]
+        [NuiBindable(typeof(List<string>))]
+        public object elements = new List<string>();
         public NuiOptions()
         {
             type = "options";

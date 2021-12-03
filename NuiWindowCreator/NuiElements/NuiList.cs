@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NuiWindowCreator.NuiProperties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,8 +9,10 @@ namespace NuiWindowCreator.NuiElements
     {
         [NuiIgnoreProperty]
         public List<object[]> row_template = new List<object[]>();
+        [GuiProperty(typeof(NuiBindIntProperty))]
         [NuiBindable(typeof(int))]
         public object row_count = new BindValue { bind = "list_row_count" };
+        [GuiProperty(typeof(NuiSimpleFloatProperty))]
         public float row_height = 25.0f;
         public NuiList()
         {

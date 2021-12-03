@@ -80,7 +80,7 @@ namespace NuiWindowCreator.NuiProperties
             else
             {
                 bindValue = new BindValue();
-                T localValue = default(T);
+                localValue = default(T);
             }
         }
     }

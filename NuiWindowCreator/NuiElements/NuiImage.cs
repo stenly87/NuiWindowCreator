@@ -1,11 +1,16 @@
-﻿namespace NuiWindowCreator.NuiElements
+﻿using NuiWindowCreator.NuiProperties;
+
+namespace NuiWindowCreator.NuiElements
 {
     public class NuiImage : NuiElement
     {
+        [GuiProperty(typeof(NuiAspectSelectProperty))]
         [NuiBindable(typeof(NuiAspect))]
         public object image_aspect;
+        [GuiProperty(typeof(NuiHAlignSelectProperty))]
         [NuiBindable(typeof(NuiHAlign))]
         public object image_halign;
+        [GuiProperty(typeof(NuiVAlignSelectProperty))]
         [NuiBindable(typeof(NuiVAlign))]
         public object image_valign;
 

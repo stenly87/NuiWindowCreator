@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using NuiWindowCreator.NuiProperties;
+using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
     public partial class NuiGroup : NuiElement, IHaveChildrens
     {
-        [NuiIgnoreProperty]
         public List<INui> children { get; set; } = new List<INui>();
+        [GuiProperty(typeof(NuiSimpleBoolProperty))]
         public bool border;
+        [GuiProperty(typeof(NuiScrollSelectProperty))]
         public NuiScrollbars scrollbars;
         public NuiGroup()
         {

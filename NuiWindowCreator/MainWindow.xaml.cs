@@ -3,6 +3,7 @@ using NuiWindowCreator.NuiElements;
 using NuiWindowCreator.NuiProperties;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -232,6 +233,28 @@ namespace NuiWindowCreator
         {
             NuiBindBoolNullableProperty property = (NuiBindBoolNullableProperty)((Button)sender).Tag;
             property.Value = null;
+        }
+
+        private void editCombo(object sender, RoutedEventArgs e)
+        {
+            var targetProp = ((MenuItem)sender).Tag;
+            WinListStringEdit win;
+            if (targetProp is NuiComboItemsSelectProperty prop)
+            {
+                win = new WinListStringEdit(prop.Values);
+                if (win.ShowDialog() == true)
+                {
+                    prop.Values = new ObservableCollection<StringEntry>(win.Values);
+                }
+            }
+            else if (targetProp is NuiArrayItemsSelectProperty propArray)
+            {
+                win = new WinListStringEdit(propArray.Values);
+                if (win.ShowDialog() == true)
+                {
+                    propArray.Values = new ObservableCollection<StringEntry>(win.Values);
+                }
+            }
         }
     }
 }

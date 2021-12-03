@@ -1,7 +1,10 @@
-﻿namespace NuiWindowCreator.NuiElements
+﻿using NuiWindowCreator.NuiProperties;
+
+namespace NuiWindowCreator.NuiElements
 {
     public class NuiProgress : NuiElement
     {
+        [GuiProperty(typeof(NuiBindFloatProperty))]
         [NuiBindable(typeof(float))]
         public new object value;
         public NuiProgress()

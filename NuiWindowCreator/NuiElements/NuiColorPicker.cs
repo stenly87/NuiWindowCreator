@@ -1,7 +1,10 @@
-﻿namespace NuiWindowCreator.NuiElements
+﻿using NuiWindowCreator.NuiProperties;
+
+namespace NuiWindowCreator.NuiElements
 {
     public class NuiColorPicker : NuiElement
     {
+        [GuiProperty(typeof(NuiBindColorProperty))]
         [NuiBindable(typeof(NuiColor))]
         public new object value;
         public NuiColorPicker()

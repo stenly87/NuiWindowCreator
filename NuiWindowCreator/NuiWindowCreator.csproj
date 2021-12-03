@@ -78,7 +78,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NuiProperties\Attributes\GuiPropertyAttribute.cs" />
-    <Compile Include="NuiProperties\INuiProperty.cs" />
+    <Compile Include="NuiProperties\NuiProperty.cs" />
     <Compile Include="NuiProperties\BindAble\Enums\NuiAspectSelectProperty.cs" />
     <Compile Include="NuiProperties\NotBindAble\Enums\NuiDirectionSelectProperty.cs" />
     <Compile Include="NuiProperties\BindAble\Enums\NuiBindEnumSelectProperty.cs" />

@@ -29,6 +29,12 @@ namespace NuiWindowCreator.NuiProperties
         T localValue;
         private bool isBind;
 
+        public string BindVar
+        {
+            get => bindValue.bind;
+            set => bindValue.bind = value;
+        }
+
         public object Value
         {
             get => IsBind ? (object)bindValue.bind : localValue;

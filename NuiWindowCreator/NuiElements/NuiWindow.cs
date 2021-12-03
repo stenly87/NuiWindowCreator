@@ -13,19 +13,19 @@ namespace NuiWindowCreator.NuiElements
         public object title;
         [NuiIgnoreProperty]
         public int version = 1;
-        [GuiProperty(typeof(NuiSimpleBoolProperty))]
+        [GuiProperty(typeof(NuiBindBoolProperty))]
         [NuiBindable(typeof(bool))]
         public object border;
-        [GuiProperty(typeof(NuiSimpleBoolProperty))]
+        [GuiProperty(typeof(NuiBindBoolProperty))]
         [NuiBindable(typeof(bool))]
         public object closable;
-        [GuiProperty(typeof(NuiSimpleBoolProperty))]
+        [GuiProperty(typeof(NuiBindBoolProperty))]
         [NuiBindable(typeof(bool))]
         public object collapsed;
-        [GuiProperty(typeof(NuiSimpleBoolProperty))]
+        [GuiProperty(typeof(NuiBindBoolProperty))]
         [NuiBindable(typeof(bool))]
         public object resizable;
-        [GuiProperty(typeof(NuiSimpleBoolProperty))]
+        [GuiProperty(typeof(NuiBindBoolProperty))]
         [NuiBindable(typeof(bool))]
         public object transparent;
         [GuiProperty(typeof(NuiBindGeometryProperty))]
@@ -35,7 +35,7 @@ namespace NuiWindowCreator.NuiElements
         public NuiWindow()
         {
             geometry = new NuiGeometry(-1, -1, 300, 300);
-            title = "Заголовок окна";
+            title = "caption window";
             border = true;
             closable = true;
             collapsed = false;

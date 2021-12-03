@@ -22,11 +22,22 @@ namespace NuiWindowCreator
     {
         static ContextMenu contextMenu = new ContextMenu();
         static ContextMenu contextMenuSmall = new ContextMenu();
-        public string Json {
+        public string Json
+        {
             get => json;
             set
             {
                 json = value;
+                SignalChanged();
+            }
+        }
+
+        public string Binds
+        {
+            get => binds;
+            set
+            {
+                binds = value;
                 SignalChanged();
             }
         }
@@ -49,6 +60,7 @@ namespace NuiWindowCreator
 
         NuiWindow nui = new NuiWindow();
         private string json;
+        private string binds;
 
         public MainWindow()
         {
@@ -60,7 +72,7 @@ namespace NuiWindowCreator
 
         private void InitContextMenu()
         {
-            var menuAdd = new MenuItem { Header = "Добавить" };
+            var menuAdd = new MenuItem { Header = "Add Nui element" };
 
             var variants = new string[] { "NuiCol", "NuiRow", "NuiGroup",
                 "NuiSpacer", "NuiLabel", "NuiText", "NuiButton", "NuiButtonImage", "NuiButtonSelect",
@@ -76,7 +88,7 @@ namespace NuiWindowCreator
             }
 
             contextMenu.Items.Add(menuAdd);
-            menuAdd = new MenuItem { Header = "Упаковать в" };
+            menuAdd = new MenuItem { Header = "Pack to container" };
             variants = new string[] { "NuiCol", "NuiRow", "NuiGroup" };
             foreach (var v in variants)
             {
@@ -85,7 +97,7 @@ namespace NuiWindowCreator
                 menuAdd.Items.Add(menu);
             }
             contextMenu.Items.Add(menuAdd);
-            menuAdd = new MenuItem { Header = "Упаковать в" };
+            menuAdd = new MenuItem { Header = "Pack to container" };
             variants = new string[] { "NuiCol", "NuiRow", "NuiGroup" };
             foreach (var v in variants)
             {
@@ -94,10 +106,10 @@ namespace NuiWindowCreator
                 menuAdd.Items.Add(menu);
             }
             contextMenuSmall.Items.Add(menuAdd);
-            var menuRemove = new MenuItem { Header = "Удалить" };
+            var menuRemove = new MenuItem { Header = "Remove element" };
             menuRemove.Click += MenuRemove_Click;
             contextMenu.Items.Add(menuRemove);
-            menuRemove = new MenuItem { Header = "Удалить" };
+            menuRemove = new MenuItem { Header = "Remove element" };
             menuRemove.Click += MenuRemove_Click;
             contextMenuSmall.Items.Add(menuRemove);
         }
@@ -145,11 +157,13 @@ namespace NuiWindowCreator
             else
                 ((IHaveChildrens)parent.NuiElement).ReplaceChildren(child.NuiElement, element);
             var index = parent.Items.IndexOf(child);
-            var node = new CustomTreeViewItem { 
-                Header = element.GetType().Name, 
-                ContextMenu = contextMenu, 
-                NuiElement = element, 
-                IsExpanded = true };
+            var node = new CustomTreeViewItem
+            {
+                Header = element.GetType().Name,
+                ContextMenu = contextMenu,
+                NuiElement = element,
+                IsExpanded = true
+            };
             parent.Items[index] = node;
             node.Items.Add(child);
             child.IsExpanded = true;
@@ -191,11 +205,13 @@ namespace NuiWindowCreator
 
         private CustomTreeViewItem AddNode(CustomTreeViewItem selectedElement, INui element)
         {
-            var node = new CustomTreeViewItem {
-                Header = element.GetType().Name, 
-                ContextMenu = element is IHaveChildrens || element is NuiList ? contextMenu : contextMenuSmall, 
-                NuiElement = element, 
-                IsExpanded = true };
+            var node = new CustomTreeViewItem
+            {
+                Header = element.GetType().Name,
+                ContextMenu = element is IHaveChildrens || element is NuiList ? contextMenu : contextMenuSmall,
+                NuiElement = element,
+                IsExpanded = true
+            };
             selectedElement.Items.Add(node);
             selectedElement.IsExpanded = true;
             SignalChanged(nameof(Elements));
@@ -210,6 +226,27 @@ namespace NuiWindowCreator
         private void ClickShowJson(object sender, RoutedEventArgs e)
         {
             Json = Nui.GetJsonFromWindow((NuiWindow)Elements.First().NuiElement);
+            List<string> binds = new List<string>();
+            SearchBinds(Elements.First(), binds);
+            Binds = string.Join("\n", binds);
+        }
+
+        private void SearchBinds(CustomTreeViewItem customTreeViewItem, List<string> binds)
+        {
+            foreach (var prop in customTreeViewItem.Properties)
+            {
+                var isBindProp = prop.GetType().GetProperty("IsBind");
+                if (isBindProp != null && (bool)isBindProp.GetValue(prop) == true)
+                {
+                    var isBindValue = prop.GetType().GetProperty("BindVar");
+                    if (isBindValue != null)
+                        binds.Add($"NuiSetBind(oPC, nToken, {isBindValue.GetValue(prop)}, JsonValue);");
+                    else
+                        throw new Exception();
+                }
+            }
+            foreach (CustomTreeViewItem item in customTreeViewItem.Items)
+                SearchBinds(item, binds);
         }
 
         private void ClickCopyJson(object sender, RoutedEventArgs e)

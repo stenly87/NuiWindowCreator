@@ -361,13 +361,20 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <TextBox Text="Json" TextAlignment="Center"/>
+
+        <TextBlock Text="Json" TextAlignment="Center"/>
         <TextBlock Grid.Column="1" Text="Window tree" TextAlignment="Center"/>
         <TextBlock Grid.Column="2" Text="Properties" TextAlignment="Center"/>
         
         <Border Grid.Row="1" Margin="3" BorderThickness="0.5" BorderBrush="White">
-            <TextBox Text="{Binding Json}" TextWrapping="Wrap"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox Text="{Binding Json}" TextWrapping="Wrap"/>
+                <TextBox Text="{Binding Binds}" MaxHeight="200" Grid.Row="1"/>
+            </Grid>
         </Border>
         <TreeView Grid.Row="1" 
                   ItemsSource="{Binding Elements}" 
@@ -392,6 +399,7 @@
         <StackPanel Grid.Row="2" 
                     HorizontalAlignment="Center" 
                     Orientation="Horizontal">
+            <Button Content="Generate Json" Click="ClickShowJson"/>
             <Button Content="Copy" Click="ClickCopyJson"/>
             <Button Content="Save jui" Click="ClickSaveJson"/>
         </StackPanel>
@@ -399,8 +407,6 @@
                     Grid.Column="1" 
                     HorizontalAlignment="Center" 
                     Orientation="Horizontal">
-            <Button Content="Get Json" Click="ClickShowJson"/>
-            <Separator />
             <Button Content="Save project" Click="ClickSaveBinary"/>
             <Button Content="Load project" Click="ClickLoadBinary"/>
         </StackPanel>

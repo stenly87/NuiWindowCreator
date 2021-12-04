@@ -373,9 +373,13 @@ namespace NuiWindowCreator
                 {
                     var isBindValue = prop.GetType().GetProperty("BindVar");
                     if (isBindValue != null)
-                        binds.Add($"NuiSetBind(oPC, nToken, {isBindValue.GetValue(prop)}, JsonValue);");
-                    else
-                        throw new Exception();
+                    {
+                        string json = "jsonObject";
+                        var jsonValueString = prop.GetType().GetCustomAttributes(typeof(JsonBindStringAttribute), false).FirstOrDefault();
+                        if (jsonValueString != null)
+                            json = ((JsonBindStringAttribute)jsonValueString).Value;
+                        binds.Add($"NuiSetBind(oPC, nToken, \"{isBindValue.GetValue(prop)}\", {json});");
+                    }                    
                 }
             }
             foreach (CustomTreeViewItem item in customTreeViewItem.Items)

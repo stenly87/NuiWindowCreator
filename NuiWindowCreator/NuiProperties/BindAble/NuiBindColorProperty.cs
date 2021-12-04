@@ -3,6 +3,7 @@ using System.Reflection;
 
 namespace NuiWindowCreator.NuiProperties
 {
+    [JsonBindString("jsonNuiColor")]
     internal class NuiBindColorProperty : NuiProperty
     {
         private FieldInfo fieldInfo;

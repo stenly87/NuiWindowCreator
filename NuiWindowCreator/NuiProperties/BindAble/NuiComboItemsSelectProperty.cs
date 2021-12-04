@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace NuiWindowCreator.NuiProperties
 {
+    [JsonBindString("jsonArray")]
     public class NuiComboItemsSelectProperty : NuiProperty
     {
         private FieldInfo fieldInfo;

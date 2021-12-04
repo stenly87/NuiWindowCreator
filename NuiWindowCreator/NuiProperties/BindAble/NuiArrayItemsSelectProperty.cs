@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace NuiWindowCreator.NuiProperties
 {
+    [JsonBindString("jsonArray")]
     internal class NuiArrayItemsSelectProperty : NuiProperty
     {
         private FieldInfo fieldInfo;

@@ -3,6 +3,7 @@ using System.Reflection;
 
 namespace NuiWindowCreator.NuiProperties
 {
+    [JsonBindString("jsonNuiGeometry")]
     internal class NuiBindGeometryProperty : NuiProperty
     {
         private FieldInfo fieldInfo;

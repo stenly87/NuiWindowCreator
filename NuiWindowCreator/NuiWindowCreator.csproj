@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NuiProperties\Attributes\JsonBindStringAttribute.cs" />
     <Compile Include="NuiProperties\BindAble\NuiArrayItemsSelectProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindBoolNullableProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindColorProperty.cs" />

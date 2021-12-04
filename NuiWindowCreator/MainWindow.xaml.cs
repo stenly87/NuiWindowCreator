@@ -377,5 +377,18 @@ namespace NuiWindowCreator
                 }
             }
         }
+
+        private void buttonPickColor(object sender, RoutedEventArgs e)
+        {
+            NuiBindColorProperty color = ((Button)sender).Tag as NuiBindColorProperty;
+            System.Windows.Forms.ColorDialog colorDialog = new System.Windows.Forms.ColorDialog();
+            if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                color.A = colorDialog.Color.A;
+                color.R = colorDialog.Color.R;
+                color.G = colorDialog.Color.G;
+                color.B = colorDialog.Color.B;
+            }
+        }
     }
 }

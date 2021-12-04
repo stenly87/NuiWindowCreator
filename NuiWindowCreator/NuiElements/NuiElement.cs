@@ -36,5 +36,9 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindBoolNullableProperty))]
         [NuiBindable(typeof(bool?))]
         public object visible;
+
+        [GuiProperty(typeof(NuiBindColorProperty))]
+        [NuiBindable(typeof(NuiColor))]
+        public object foreground_color;
     }
 }

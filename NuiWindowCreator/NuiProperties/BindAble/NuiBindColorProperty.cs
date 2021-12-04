@@ -36,6 +36,7 @@ namespace NuiWindowCreator.NuiProperties
             {
                 Color.a = value;
                 fieldInfo.SetValue(nuiElement, Color);
+                SignalChanged();
             }
         }
         public byte R
@@ -45,6 +46,7 @@ namespace NuiWindowCreator.NuiProperties
             {
                 Color.r = value;
                 fieldInfo.SetValue(nuiElement, Color);
+                SignalChanged();
             }
         }
         public byte G
@@ -54,6 +56,7 @@ namespace NuiWindowCreator.NuiProperties
             {
                 Color.g = value;
                 fieldInfo.SetValue(nuiElement, Color);
+                SignalChanged();
             }
         }
         public byte B
@@ -63,6 +66,7 @@ namespace NuiWindowCreator.NuiProperties
             {
                 Color.b = value;
                 fieldInfo.SetValue(nuiElement, Color);
+                SignalChanged();
             }
         }
 
@@ -70,8 +74,10 @@ namespace NuiWindowCreator.NuiProperties
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
-
-            Color = (NuiColor)fieldInfo.GetValue(nuiElement);
+            if (fieldInfo.GetValue(nuiElement) != null)
+                Color = (NuiColor)fieldInfo.GetValue(nuiElement);
+            else
+                Color = new NuiColor();
         }
     }
 }

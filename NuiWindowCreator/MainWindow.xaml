@@ -186,7 +186,7 @@
         <DataTemplate DataType="{x:Type nui:NuiBindColorProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="100"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -194,30 +194,39 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Label Content="{Binding Name}"/>
+                <Label Content="{Binding Name}" Grid.ColumnSpan="2"/>
                 <CheckBox VerticalAlignment="Center" x:Name="isBindColorCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
                 <TextBox Text="{Binding BindVar}" 
                          IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked}" 
                          Grid.Row="1" Grid.Column="1"/>
-                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2"
+                <Grid Grid.Row="2" Grid.ColumnSpan="2"
                             IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="a"/>
-                        <TextBox Text="{Binding A}"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="a"/>
+                            <TextBox Text="{Binding A}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="r"/>
+                            <TextBox Text="{Binding R}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="g"/>
+                            <TextBox Text="{Binding G}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="b"/>
+                            <TextBox Text="{Binding B}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="r"/>
-                        <TextBox Text="{Binding R}"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Content="PickColor" Tag="{Binding}" VerticalAlignment="Top" Click="buttonPickColor"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="g"/>
-                        <TextBox Text="{Binding G}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="b"/>
-                        <TextBox Text="{Binding B}"/>
-                    </StackPanel>
-                </StackPanel>
+                </Grid>
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiBindGeometryProperty}">

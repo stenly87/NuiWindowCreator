@@ -225,10 +225,26 @@ namespace NuiWindowCreator
 
         private void ClickShowJson(object sender, RoutedEventArgs e)
         {
+            UpdateListTemplatesWidth(nui.root);
             Json = Nui.GetJsonFromWindow((NuiWindow)Elements.First().NuiElement);
             List<string> binds = new List<string>();
             SearchBinds(Elements.First(), binds);
             Binds = string.Join("\n", binds);
+        }
+
+        private void UpdateListTemplatesWidth(INui root)
+        {
+            if (root is IHaveChildrens parent)
+            {
+                foreach (var item in parent.children)
+                {
+                    UpdateListTemplatesWidth(item);
+                }
+            }
+            else if (root is NuiList nuiList)
+            {
+                nuiList.UpdateTemplatesWidth();
+            }
         }
 
         private void SearchBinds(CustomTreeViewItem customTreeViewItem, List<string> binds)
@@ -351,7 +367,7 @@ namespace NuiWindowCreator
                     BuildTree(item, nextNode);
                 }
             }
-            else if (nui.root is NuiList nuiList)
+            else if (root is NuiList nuiList)
             {
                 var childs = nuiList.GetChilds();
                 foreach (var item in childs)

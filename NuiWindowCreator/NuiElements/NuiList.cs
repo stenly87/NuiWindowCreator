@@ -42,5 +42,15 @@ namespace NuiWindowCreator.NuiElements
         {
             return row_template.Select(s => (INui)s[0]);
         }
+
+        internal void UpdateTemplatesWidth()
+        {
+            row_template.ForEach(row => {
+                if (row[0] is NuiElement nui && nui.width != null)
+                {
+                    row[1] = nui.width;
+                }
+            });
+        }
     }
 }

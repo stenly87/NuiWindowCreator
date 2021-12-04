@@ -9,5 +9,7 @@ namespace NuiWindowCreator.NuiElements
         bool AddChildren(INui child);
         void RemoveChildren(INui child);
         void ReplaceChildren(INui oldChild, INui newChild);
+        void MoveUpChildren(INui nuiElement);
+        void MoveDownChildren(INui nuiElement);
     }
 }

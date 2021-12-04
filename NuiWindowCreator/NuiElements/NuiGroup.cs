@@ -35,5 +35,19 @@ namespace NuiWindowCreator.NuiElements
             int index = children.IndexOf(oldChild);
             children[index] = newChild;
         }
+
+        public void MoveUpChildren(INui nuiElement)
+        {
+            int index = children.IndexOf(nuiElement);
+            children.Remove(nuiElement);
+            children.Insert(--index, nuiElement);
+        }
+
+        public void MoveDownChildren(INui nuiElement)
+        {
+            int index = children.IndexOf(nuiElement);
+            children.Remove(nuiElement);
+            children.Insert(++index, nuiElement);
+        }
     }
 }

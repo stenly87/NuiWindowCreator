@@ -106,12 +106,129 @@ namespace NuiWindowCreator
                 menuAdd.Items.Add(menu);
             }
             contextMenuSmall.Items.Add(menuAdd);
+            var menuItem = CreateMenuVisual();
+            contextMenu.Items.Add(menuItem);
+            menuItem = CreateMenuVisual();
+            contextMenuSmall.Items.Add(menuItem);
+
             var menuRemove = new MenuItem { Header = "Remove element" };
             menuRemove.Click += MenuRemove_Click;
             contextMenu.Items.Add(menuRemove);
             menuRemove = new MenuItem { Header = "Remove element" };
             menuRemove.Click += MenuRemove_Click;
             contextMenuSmall.Items.Add(menuRemove);
+        }
+
+        private MenuItem CreateMenuVisual()
+        {
+            var menuItem = new MenuItem { Header = "Visual" };
+            var menuMove = new MenuItem { Header = "Move up" };
+            menuMove.Click += MenuMoveUp_Click;
+            menuItem.Items.Add(menuMove);
+            menuMove = new MenuItem { Header = "Move down" };
+            menuMove.Click += MenuMoveDown_Click;
+            menuItem.Items.Add(menuMove);
+            menuMove = new MenuItem { Header = "Cut" };
+            menuMove.Click += MenuCut_Click;
+            menuItem.Items.Add(menuMove);
+            menuMove = new MenuItem { Header = "Paste" };
+            menuMove.Click += MenuPaste_Click;
+            menuItem.Items.Add(menuMove);
+            return menuItem;
+        }
+
+        private void MenuPaste_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+            if (cut == null)
+                return;
+            if (((CustomTreeViewItem)SelectedElement).NuiElement is IHaveChildrens parent)
+                parent.AddChildren(cut.NuiElement);
+            else if (((CustomTreeViewItem)SelectedElement.Parent).NuiElement is NuiList list)
+                list.AddTemplateCell(cut.NuiElement);
+            else
+                return;
+            SelectedElement.Items.Add(cut);
+            cut = null;
+        }
+        CustomTreeViewItem cut;
+        private void MenuCut_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+
+            if (((CustomTreeViewItem)SelectedElement.Parent).NuiElement is IHaveChildrens parent)
+                parent.RemoveChildren(SelectedElement.NuiElement);
+            else if (((CustomTreeViewItem)SelectedElement.Parent).NuiElement is NuiList list)
+                list.RemoveTemplateCell(SelectedElement.NuiElement);
+            else
+                return;
+            cut = SelectedElement;
+            ((CustomTreeViewItem)SelectedElement.Parent).Items.Remove(cut);
+        }
+
+        private void MenuMoveDown_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+            var parent = ((CustomTreeViewItem)SelectedElement.Parent);
+            var index = parent.Items.IndexOf(SelectedElement);
+            if (index + 1 == parent.Items.Count)
+                return;
+            if (parent.NuiElement is IHaveChildrens parentNui)
+                parentNui.MoveDownChildren(SelectedElement.NuiElement);
+            else if (parent.NuiElement is NuiList list)
+                list.MoveDownTemplateCell(SelectedElement.NuiElement);
+            else
+                return;
+            index++;
+            var remove = SelectedElement;
+            var newSelectedElement = new CustomTreeViewItem
+            {
+                Header = remove.Header,
+                ContextMenu = remove.ContextMenu,
+                NuiElement = remove.NuiElement,
+                IsExpanded = true
+            };
+
+            parent.Items.Insert(index, newSelectedElement);
+            parent.Items.Remove(remove);
+        }
+
+        private void MenuMoveUp_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+            var parent = ((CustomTreeViewItem)SelectedElement.Parent);
+            var index = parent.Items.IndexOf(SelectedElement);
+            if (index == 0)
+                return;
+            if (parent.NuiElement is IHaveChildrens parentNui)
+                parentNui.MoveUpChildren(SelectedElement.NuiElement);
+            else if (parent.NuiElement is NuiList list)
+                list.MoveUpTemplateCell(SelectedElement.NuiElement);
+            else
+                return;
+            index--;
+            var remove = SelectedElement;
+            var newSelectedElement = new CustomTreeViewItem
+            {
+                Header = remove.Header,
+                ContextMenu = remove.ContextMenu,
+                NuiElement = remove.NuiElement,
+                IsExpanded = true
+            };
+            parent.Items.Insert(index, newSelectedElement);
+            parent.Items.Remove(remove);
         }
 
         private void MenuRemove_Click(object sender, RoutedEventArgs e)

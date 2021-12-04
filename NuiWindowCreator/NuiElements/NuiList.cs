@@ -52,5 +52,21 @@ namespace NuiWindowCreator.NuiElements
                 }
             });
         }
+
+        internal void MoveUpTemplateCell(INui nuiElement)
+        {
+            var row = row_template.FirstOrDefault(s => s[0] == nuiElement);
+            int index = row_template.IndexOf(row);
+            row_template.Remove(row);
+            row_template.Insert(--index, row);
+        }
+
+        internal void MoveDownTemplateCell(INui nuiElement)
+        {
+            var row = row_template.FirstOrDefault(s => s[0] == nuiElement);
+            int index = row_template.IndexOf(row);
+            row_template.Remove(row);
+            row_template.Insert(++index, row);
+        }
     }
 }

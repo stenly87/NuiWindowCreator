@@ -62,5 +62,13 @@ namespace NuiWindowCreator
             Values.Add(newRow);
             SelectedValue = newRow;
         }
+
+        private void AddFromClipboard(object sender, RoutedEventArgs e)
+        {
+            var chars = new char[] { '\r', '\n'};
+            var rows = Clipboard.GetText().Split(chars, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var row in rows)
+                Values.Add(new StringEntry { Value = row });
+        }
     }
 }

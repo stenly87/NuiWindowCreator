@@ -32,6 +32,7 @@
             <TextBox Text="{Binding SelectedValue.Value, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="Delete" Click="DeleteSelectedRow"/>
         </StackPanel>
+        <Button Content="Add rows from buffer" Click="AddFromClipboard" Grid.Row="1" />
         <Button Content="Save and close" Click="SaveAndClose" Grid.Row="1" Grid.Column="1"/>
     </Grid>
 </Window>

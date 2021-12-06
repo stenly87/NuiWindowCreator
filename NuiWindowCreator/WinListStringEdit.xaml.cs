@@ -70,5 +70,10 @@ namespace NuiWindowCreator
             foreach (var row in rows)
                 Values.Add(new StringEntry { Value = row });
         }
+
+        private void DeleteAllRow(object sender, RoutedEventArgs e)
+        {
+            Values.Clear();
+        }
     }
 }

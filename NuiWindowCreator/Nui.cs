@@ -13,11 +13,17 @@ namespace NuiWindowCreator
     {
         internal static string GetJsonFromWindow(NuiWindow window)
         {
-            return JsonConvert.SerializeObject(window, 
-                new JsonSerializerSettings {
+            string result = JsonConvert.SerializeObject(window,
+                new JsonSerializerSettings
+                {
                     Formatting = Formatting.Indented,
-                    NullValueHandling = NullValueHandling.Ignore 
+                    NullValueHandling = NullValueHandling.Ignore
                 });
+            if (!result.Contains("\"collapsed\":"))
+            {
+                result = result.Insert(1, "\n\"collapsed\": null,");
+            }    
+            return result;
         }
 
         internal static NuiElement GetElementByName(string elementName)

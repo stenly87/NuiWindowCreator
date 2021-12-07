@@ -19,7 +19,7 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindBoolProperty))]
         [NuiBindable(typeof(bool))]
         public object closable;
-        [GuiProperty(typeof(NuiBindBoolProperty))]
+        [GuiProperty(typeof(NuiBindBoolNullableProperty))]
         [NuiBindable(typeof(bool))]
         public object collapsed;
         [GuiProperty(typeof(NuiBindBoolProperty))]
@@ -39,7 +39,7 @@ namespace NuiWindowCreator.NuiElements
             border = true;
             closable = true;
             collapsed = false;
-            resizable = true;
+            resizable = null;
             transparent = false;
             root = new NullElement();
         }

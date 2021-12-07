@@ -189,17 +189,15 @@ namespace NuiWindowCreator
             else
                 return;
             index++;
-            var remove = SelectedElement;
-            var newSelectedElement = new CustomTreeViewItem
-            {
-                Header = remove.Header,
-                ContextMenu = remove.ContextMenu,
-                NuiElement = remove.NuiElement,
-                IsExpanded = true
-            };
-
-            parent.Items.Insert(index, newSelectedElement);
-            parent.Items.Remove(remove);
+            List<CustomTreeViewItem> tempArray = new List<CustomTreeViewItem>();
+            foreach (var item in parent.Items)
+                tempArray.Add((CustomTreeViewItem)item);
+            var temp = tempArray[index];
+            tempArray[index] = SelectedElement;
+            tempArray[index - 1] = temp;
+            parent.Items.Clear();
+            foreach (var item in tempArray)
+                parent.Items.Add(item);
         }
 
         private void MenuMoveUp_Click(object sender, RoutedEventArgs e)
@@ -219,16 +217,15 @@ namespace NuiWindowCreator
             else
                 return;
             index--;
-            var remove = SelectedElement;
-            var newSelectedElement = new CustomTreeViewItem
-            {
-                Header = remove.Header,
-                ContextMenu = remove.ContextMenu,
-                NuiElement = remove.NuiElement,
-                IsExpanded = true
-            };
-            parent.Items.Insert(index, newSelectedElement);
-            parent.Items.Remove(remove);
+            List<CustomTreeViewItem> tempArray = new List<CustomTreeViewItem>();
+            foreach (var item in parent.Items)
+                tempArray.Add((CustomTreeViewItem)item);
+            var temp = tempArray[index];
+            tempArray[index] = SelectedElement;
+            tempArray[index + 1] = temp;
+            parent.Items.Clear();
+            foreach (var item in tempArray)
+                parent.Items.Add(item);
         }
 
         private void MenuRemove_Click(object sender, RoutedEventArgs e)

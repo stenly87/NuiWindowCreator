@@ -5,6 +5,7 @@ namespace NuiWindowCreator.NuiElements
     [System.Serializable]
     public class NuiProgress : NuiElement
     {
+        [NuiUnic()]
         [GuiProperty(typeof(NuiBindFloatProperty))]
         [NuiBindable(typeof(float))]
         public new object value;

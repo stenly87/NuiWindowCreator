@@ -14,6 +14,7 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindIntProperty))]
         [NuiBindable(typeof(int))]
         public object step = 1;
+        [NuiUnic()]
         [GuiProperty(typeof(NuiBindIntProperty))]
         [NuiBindable(typeof(int))]
         public new object value;

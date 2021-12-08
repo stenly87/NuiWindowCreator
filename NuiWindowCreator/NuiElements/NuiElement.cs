@@ -12,6 +12,7 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindStringProperty))]
         [NuiBindable(typeof(string))]
         public object label = "";
+        [NuiUnic()]
         [GuiProperty(typeof(NuiBindStringProperty))]
         [NuiBindable(typeof(string))]
         public object value;

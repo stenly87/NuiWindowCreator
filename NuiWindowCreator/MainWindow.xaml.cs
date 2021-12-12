@@ -457,6 +457,7 @@ namespace NuiWindowCreator
                     using (var fs = File.OpenRead(sfd.FileName))
                         nui = (NuiWindow)bin.Deserialize(fs);
                     ReloadTree();
+                    Title = "Gem of the North Nui Creator - " + new FileInfo(sfd.FileName).Name;
                 }
                 catch (Exception ex)
                 {

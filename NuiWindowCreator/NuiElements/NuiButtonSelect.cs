@@ -5,6 +5,7 @@ namespace NuiWindowCreator.NuiElements
     [System.Serializable]
     public class NuiButtonSelect : NuiElement
     {
+        [NuiUnic()]
         [GuiProperty(typeof(NuiBindIntProperty))]
         [NuiBindable(typeof(int))]
         public new object value;

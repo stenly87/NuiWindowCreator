@@ -11,6 +11,7 @@ namespace NuiWindowCreator.NuiElements
         [NuiBindable(typeof(List<object[]>))]
         public object elements = new List<object[]>();
 
+        [NuiUnic()]
         [GuiProperty(typeof(NuiBindIntProperty))]
         [NuiBindable(typeof(int))]
         public new object value = new BindValue { bind = "combo_selected_index" };

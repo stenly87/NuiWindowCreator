@@ -76,7 +76,12 @@ namespace NuiWindowCreator.NuiProperties
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
             if (fieldInfo.GetValue(nuiElement) != null)
-                Color = (NuiColor)fieldInfo.GetValue(nuiElement);
+            {
+                if (fieldInfo.GetValue(nuiElement) is BindValue bind)
+                    bindVar = bind;
+                else
+                    Color = (NuiColor)fieldInfo.GetValue(nuiElement);
+            }
             else
                 Color = new NuiColor();
         }

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiProperties
 {
-    [JsonBindString("jsonInt")]
+    [JsonBindString("JsonInt()")]
     public class NuiBindEnumSelectProperty<T> : NuiProperty where T : Enum
     {
         public string Name { get => fieldInfo.Name; }

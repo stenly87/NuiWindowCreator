@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace NuiWindowCreator.NuiProperties
 {
-    [JsonBindString("jsonString")]
+    [JsonBindString("JsonString()")]
     public class NuiBindStringProperty : NuiBindProperty<string>
     {
         public NuiBindStringProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)

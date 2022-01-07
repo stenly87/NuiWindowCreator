@@ -240,8 +240,8 @@
                           CanUserAddRows="True"     
                           AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Start" Binding="{Binding Start}" />
-                            <DataGridTextColumn Header="End" Binding="{Binding End}"/>
+                            <DataGridTextColumn Header="X" Binding="{Binding Start}" />
+                            <DataGridTextColumn Header="Y" Binding="{Binding End}"/>
                             <DataGridTemplateColumn Header="Actions" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

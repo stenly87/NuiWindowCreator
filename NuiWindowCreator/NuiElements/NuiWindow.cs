@@ -38,8 +38,8 @@ namespace NuiWindowCreator.NuiElements
             title = "caption window";
             border = true;
             closable = true;
-            collapsed = false;
-            resizable = null;
+            collapsed = null;
+            resizable = false;
             transparent = false;
             root = new NullElement();
         }

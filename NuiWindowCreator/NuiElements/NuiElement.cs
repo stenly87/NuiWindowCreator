@@ -1,4 +1,6 @@
 ﻿using NuiWindowCreator.NuiProperties;
+using System;
+using System.Collections.Generic;
 
 namespace NuiWindowCreator.NuiElements
 {
@@ -41,5 +43,27 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindColorProperty))]
         [NuiBindable(typeof(NuiColor))]
         public object foreground_color;
+
+        [NuiIgnoreProperty]
+        public List<INui> draw_list;
+        [GuiProperty(typeof(NuiBindBoolNullableProperty))]
+        [NuiBindable(typeof(bool?))]
+        public object draw_list_scissor;
+
+        internal void AddDrawItem(INui element)
+        {
+            if (draw_list == null)
+                draw_list = new List<INui>();
+            if (draw_list_scissor == null)
+                draw_list_scissor = true;
+            draw_list.Add(element);
+        }
+
+        internal void RemoveDrawItem(INui element)
+        {
+            draw_list.Remove(element);
+            if (draw_list.Count == 0)
+                draw_list = null;
+        }
     }
 }

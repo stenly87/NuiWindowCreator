@@ -183,86 +183,162 @@
                 <TextBox Text="{Binding Value}" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type nui:NuiBindColorProperty}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Label Content="{Binding Name}" Grid.ColumnSpan="2"/>
-                <CheckBox VerticalAlignment="Center" x:Name="isBindColorCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
-                <TextBox Text="{Binding BindVar}" 
-                         IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked}" 
-                         Grid.Row="1" Grid.Column="1"/>
-                <Grid Grid.Row="2" Grid.ColumnSpan="2"
-                            IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
+        <DataTemplate DataType="{x:Type nui:NuiBindVec2Property}">
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
+                <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="100"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="a"/>
-                            <TextBox Text="{Binding A}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="r"/>
-                            <TextBox Text="{Binding R}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="g"/>
-                            <TextBox Text="{Binding G}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="b"/>
-                            <TextBox Text="{Binding B}"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Horizontal">
-                        <Button Content="PickColor" Tag="{Binding}" VerticalAlignment="Top" Click="buttonPickColor"/>
-                    </StackPanel>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Content="{Binding Name}" Grid.ColumnSpan="2"/>
+                    <CheckBox VerticalAlignment="Center" x:Name="isBindVec2Check" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                    <TextBox Text="{Binding BindVar}" 
+                             IsEnabled="{Binding ElementName=isBindVec2Check, Path=IsChecked}" 
+                             Grid.Row="1" Grid.Column="1"/>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Label Content="X"/>
+                        <Label Content="Y" Grid.Row="1"/>
+                        <TextBox Grid.Column="1" Text="{Binding X}"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Y}"/>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiArrayFloatPairsSelectProperty}">
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Content="{Binding Name}" Grid.ColumnSpan="2"/>
+                    <CheckBox VerticalAlignment="Center" x:Name="isBindFloatPairsCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                    <TextBox Text="{Binding BindVar}" 
+                         IsEnabled="{Binding ElementName=isBindFloatPairsCheck, Path=IsChecked}" 
+                         Grid.Row="1" Grid.Column="1"/>
+                    <DataGrid Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding Values}" Height="200" 
+                          CanUserDeleteRows="True" 
+                          CanUserAddRows="True"     
+                          AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Start" Binding="{Binding Start}" />
+                            <DataGridTextColumn Header="End" Binding="{Binding End}"/>
+                            <DataGridTemplateColumn Header="Actions" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Remove" Command="Delete"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Grid.Row="3" Grid.Column="1" Content="Save points" HorizontalAlignment="Left" Tag="{Binding}" Click="buttonSaveArrayFloats"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiBindColorProperty}">
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Content="{Binding Name}" Grid.ColumnSpan="2"/>
+                    <CheckBox VerticalAlignment="Center" x:Name="isBindColorCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                    <TextBox Text="{Binding BindVar}" 
+                         IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked}" 
+                         Grid.Row="1" Grid.Column="1"/>
+                    <Grid Grid.Row="2" Grid.ColumnSpan="2"
+                            IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="a"/>
+                                <TextBox Text="{Binding A}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="r"/>
+                                <TextBox Text="{Binding R}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="g"/>
+                                <TextBox Text="{Binding G}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="b"/>
+                                <TextBox Text="{Binding B}"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button Content="PickColor" Tag="{Binding}" VerticalAlignment="Top" Click="buttonPickColor"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
         </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiBindGeometryProperty}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Label Content="{Binding Name}"/>
-                <CheckBox VerticalAlignment="Center" x:Name="isBindGeometryCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
-                <TextBox Text="{Binding BindVar}" IsEnabled="{Binding ElementName=isBindGeometryCheck, Path=IsChecked}" Grid.Row="1" Grid.Column="1"/>
-                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2"
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label Content="{Binding Name}"/>
+                    <CheckBox VerticalAlignment="Center" x:Name="isBindGeometryCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                    <TextBox Text="{Binding BindVar}" IsEnabled="{Binding ElementName=isBindGeometryCheck, Path=IsChecked}" Grid.Row="1" Grid.Column="1"/>
+                    <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="2"
                             IsEnabled="{Binding ElementName=isBindGeometryCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="x"/>
-                        <TextBox Text="{Binding X}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="x"/>
+                            <TextBox Text="{Binding X}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="y"/>
+                            <TextBox Text="{Binding Y}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="h"/>
+                            <TextBox Text="{Binding H}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="w"/>
+                            <TextBox Text="{Binding W}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="y"/>
-                        <TextBox Text="{Binding Y}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="h"/>
-                        <TextBox Text="{Binding H}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="w"/>
-                        <TextBox Text="{Binding W}"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
+                </Grid>
+            </Border>
         </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiScrollSelectProperty}">
             <Grid>
@@ -286,7 +362,7 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type nui:NuiAspectSelectProperty}">
-            <Border Padding="3" BorderThickness="1" BorderBrush="{StaticResource fontWhite}">
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
@@ -310,7 +386,7 @@
             </Border>
         </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiHAlignSelectProperty}">
-            <Border Padding="3" BorderThickness="1" BorderBrush="{StaticResource fontWhite}">
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
@@ -334,7 +410,7 @@
             </Border>
         </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiVAlignSelectProperty}">
-            <Border Padding="3" BorderThickness="1" BorderBrush="{StaticResource fontWhite}">
+            <Border BorderThickness="1" BorderBrush="WhiteSmoke">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>

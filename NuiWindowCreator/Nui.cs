@@ -33,5 +33,13 @@ namespace NuiWindowCreator
                 return null;
             return (NuiElement)Activator.CreateInstance(type);
         }
+
+        internal static INui GetiNuiElementByName(string elementName)
+        {
+            var type = System.Reflection.Assembly.GetExecutingAssembly().GetType($"NuiWindowCreator.NuiElements.{elementName}");
+            if (type == null)
+                return null;
+            return (INui)Activator.CreateInstance(type);
+        }
     }
 }

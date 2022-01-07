@@ -12,6 +12,25 @@
         <SolidColorBrush x:Key="fontBlue" Color="#569cd6"/>
         <SolidColorBrush x:Key="selectionColor" Color="#007acc" />
         <SolidColorBrush x:Key="disabledColor" Color="#3f3f46"/>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="RowBackground" Value="{StaticResource backgroundBlack}"/>
+            <Setter Property="Background" Value="{StaticResource backgroundBlack}"/>
+            <Setter Property="Foreground" Value="{StaticResource fontWhite}"/>
+                <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Panel.Background" Value="{StaticResource backgroundBlack}"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Foreground" Value="{StaticResource fontWhite}"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="3"/>
             <Setter Property="MinWidth" Value="100"/>

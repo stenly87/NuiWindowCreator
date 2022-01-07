@@ -88,6 +88,25 @@ namespace NuiWindowCreator
             }
 
             contextMenu.Items.Add(menuAdd);
+            menuAdd = new MenuItem { Header = "Add Draw element" };
+            variants = new string[] { "NuiDrawListPolyLine", "NuiDrawListCurve", "NuiDrawListCircle", "NuiDrawListArc", "NuiDrawListText", "NuiDrawListImage" };
+            foreach (var v in variants)
+            {
+                var menu = new MenuItem { Header = v };
+                menu.Click += MenuAddDraw_Click;
+                menuAdd.Items.Add(menu);
+            }
+            contextMenu.Items.Add(menuAdd);
+            menuAdd = new MenuItem { Header = "Add Draw element" };
+            variants = new string[] { "NuiDrawListPolyLine", "NuiDrawListCurve", "NuiDrawListCircle", "NuiDrawListArc", "NuiDrawListText", "NuiDrawListImage" };
+            foreach (var v in variants)
+            {
+                var menu = new MenuItem { Header = v };
+                menu.Click += MenuAddDraw_Click;
+                menuAdd.Items.Add(menu);
+            }
+            contextMenuSmall.Items.Add(menuAdd);
+
             menuAdd = new MenuItem { Header = "Pack to container" };
             variants = new string[] { "NuiCol", "NuiRow", "NuiGroup" };
             foreach (var v in variants)
@@ -141,7 +160,7 @@ namespace NuiWindowCreator
         {
             if (SelectedElement == null)
                 return;
-            if (SelectedElement.NuiElement is NuiWindow)
+            if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
                 return;
             if (cut == null)
                 return;
@@ -159,7 +178,7 @@ namespace NuiWindowCreator
         {
             if (SelectedElement == null)
                 return;
-            if (SelectedElement.NuiElement is NuiWindow)
+            if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
                 return;
 
             if (((CustomTreeViewItem)SelectedElement.Parent).NuiElement is IHaveChildrens parent)
@@ -176,7 +195,7 @@ namespace NuiWindowCreator
         {
             if (SelectedElement == null)
                 return;
-            if (SelectedElement.NuiElement is NuiWindow)
+            if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
                 return;
             var parent = ((CustomTreeViewItem)SelectedElement.Parent);
             var index = parent.Items.IndexOf(SelectedElement);
@@ -204,7 +223,7 @@ namespace NuiWindowCreator
         {
             if (SelectedElement == null)
                 return;
-            if (SelectedElement.NuiElement is NuiWindow)
+            if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
                 return;
             var parent = ((CustomTreeViewItem)SelectedElement.Parent);
             var index = parent.Items.IndexOf(SelectedElement);
@@ -239,6 +258,12 @@ namespace NuiWindowCreator
             var parent = (CustomTreeViewItem)SelectedElement.Parent;
             parent.Items.Remove(child);
 
+            if (child.NuiElement is NuiDrawListItem)
+            {
+                ((NuiElement)parent.NuiElement).RemoveDrawItem(child.NuiElement);
+                return;
+            }
+
             if (parent.NuiElement is NuiWindow window)
                 window.root = new NullElement();
             else if (parent.NuiElement is NuiList list)
@@ -251,7 +276,7 @@ namespace NuiWindowCreator
         {
             if (SelectedElement == null)
                 return;
-            if (SelectedElement.NuiElement is NuiWindow)
+            if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
                 return;
 
             string elementName = ((MenuItem)e.Source).Header.ToString();
@@ -315,6 +340,27 @@ namespace NuiWindowCreator
                     return;
                 AddNode(SelectedElement, element);
             }
+        }
+
+        private void MenuAddDraw_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement == null)
+                return;
+
+            if (SelectedElement.NuiElement is NuiWindow)
+                return;
+
+            if (SelectedElement.NuiElement is NuiDrawListItem)
+                return;
+
+            string elementName = ((MenuItem)e.Source).Header.ToString();
+            var element = Nui.GetiNuiElementByName(elementName);
+            if (element == null)
+                return;
+
+            ((NuiElement)SelectedElement.NuiElement).AddDrawItem(element);
+
+            AddNode(SelectedElement, element);
         }
 
         private CustomTreeViewItem AddNode(CustomTreeViewItem selectedElement, INui element)
@@ -509,5 +555,13 @@ namespace NuiWindowCreator
                 color.B = colorDialog.Color.B;
             }
         }
+
+        private void buttonSaveArrayFloats(object sender, RoutedEventArgs e)
+        {
+            var array = ((Button)sender).Tag as NuiArrayFloatPairsSelectProperty;
+            if (array != null)
+                array.UpdateValues();
+        }
+
     }
 }

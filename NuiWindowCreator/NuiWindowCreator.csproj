@@ -79,11 +79,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NuiElements\draw\NuiDrawListArc.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListCircle.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListCurve.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListImage.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListText.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiArrayFloatPairsSelectProperty.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListItem.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListPolyLine.cs" />
     <Compile Include="NuiProperties\Attributes\NuiUnicAttribute.cs" />
     <Compile Include="NuiProperties\Attributes\JsonBindStringAttribute.cs" />
     <Compile Include="NuiProperties\BindAble\NuiArrayItemsSelectProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindBoolNullableProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindColorProperty.cs" />
+    <Compile Include="NuiProperties\BindAble\NuiBindVec2Property.cs" />
     <Compile Include="NuiProperties\ErrorProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindBoolProperty.cs" />
     <Compile Include="NuiProperties\BindAble\NuiBindFloatProperty.cs" />
@@ -116,6 +125,7 @@
     <Compile Include="NuiProperties\BindAble\NuiComboItemsSelectProperty.cs" />
     <Compile Include="NuiProperties\PropertyFactory.cs" />
     <Compile Include="NuiProperties\NotBindAble\NuiSimpleProperty.cs" />
+    <Compile Include="NuiStructs\NuiVec2.cs" />
     <Compile Include="WinListStringEdit.xaml.cs">
       <DependentUpon>WinListStringEdit.xaml</DependentUpon>
     </Compile>
@@ -207,5 +217,6 @@
   <ItemGroup>
     <Resource Include="hnet.com-image.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

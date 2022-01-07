@@ -54,8 +54,6 @@ namespace NuiWindowCreator.NuiElements
         {
             if (draw_list == null)
                 draw_list = new List<INui>();
-            if (draw_list_scissor == null)
-                draw_list_scissor = true;
             draw_list.Add(element);
         }
 

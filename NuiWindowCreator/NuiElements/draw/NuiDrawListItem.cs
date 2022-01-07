@@ -23,7 +23,7 @@ namespace NuiWindowCreator.NuiElements
         public NuiDrawListItem()
         {
             line_thickness = 1.0f;
-            fill = true;
+            fill = false;
             enabled = true;
             color = new NuiColor();
         }

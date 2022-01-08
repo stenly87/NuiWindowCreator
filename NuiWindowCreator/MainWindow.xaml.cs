@@ -541,14 +541,6 @@ namespace NuiWindowCreator
                     BuildTree(item, nextNode);
                 }
             }
-            else if (root is NuiElement nui && nui.draw_list != null)
-            {
-                foreach (var item in nui.draw_list)
-                {
-                    var nextNode = AddNode(rootNode, item);
-                    BuildTree(item, nextNode);
-                }
-            }
         }
 
         private void buttonPickColor(object sender, RoutedEventArgs e)

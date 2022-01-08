@@ -31,6 +31,9 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindGeometryProperty))]
         [NuiBindable(typeof(NuiGeometry))]
         public object geometry;
+        [GuiProperty(typeof(NuiBindColorProperty))]
+        [NuiBindable(typeof(NuiColor))]
+        public object foreground_color;
 
         public NuiWindow()
         {

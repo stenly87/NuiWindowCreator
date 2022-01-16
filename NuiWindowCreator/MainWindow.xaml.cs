@@ -147,6 +147,9 @@ namespace NuiWindowCreator
             menuMove = new MenuItem { Header = "Move down" };
             menuMove.Click += MenuMoveDown_Click;
             menuItem.Items.Add(menuMove);
+            menuMove = new MenuItem { Header = "Copy" };
+            menuMove.Click += MenuCopy_Click;
+            menuItem.Items.Add(menuMove);
             menuMove = new MenuItem { Header = "Cut" };
             menuMove.Click += MenuCut_Click;
             menuItem.Items.Add(menuMove);
@@ -162,18 +165,27 @@ namespace NuiWindowCreator
                 return;
             if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
                 return;
-            if (cut == null)
+            if (paste == null)
                 return;
             if (((CustomTreeViewItem)SelectedElement).NuiElement is IHaveChildrens parent)
-                parent.AddChildren(cut.NuiElement);
+                parent.AddChildren(paste.NuiElement);
             else if (((CustomTreeViewItem)SelectedElement.Parent).NuiElement is NuiList list)
-                list.AddTemplateCell(cut.NuiElement);
+                list.AddTemplateCell(paste.NuiElement);
             else
                 return;
-            SelectedElement.Items.Add(cut);
-            cut = null;
+            SelectedElement.Items.Add(paste);
+            paste = null;
         }
-        CustomTreeViewItem cut;
+        CustomTreeViewItem paste;
+        private void MenuCopy_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement == null)
+                return;
+            if (SelectedElement.NuiElement is NuiWindow || SelectedElement.NuiElement is NuiDrawListItem)
+                return;
+
+            paste = (CustomTreeViewItem)SelectedElement.Clone();
+        }
         private void MenuCut_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedElement == null)
@@ -187,8 +199,8 @@ namespace NuiWindowCreator
                 list.RemoveTemplateCell(SelectedElement.NuiElement);
             else
                 return;
-            cut = SelectedElement;
-            ((CustomTreeViewItem)SelectedElement.Parent).Items.Remove(cut);
+            paste = SelectedElement;
+            ((CustomTreeViewItem)SelectedElement.Parent).Items.Remove(paste);
         }
 
         private void MenuMoveDown_Click(object sender, RoutedEventArgs e)

@@ -71,7 +71,15 @@ namespace NuiWindowCreator.NuiProperties
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
 
-            Geometry = (NuiGeometry)fieldInfo.GetValue(nuiElement);
+            var val = fieldInfo.GetValue(nuiElement);
+            if (val is NuiGeometry)
+                Geometry = (NuiGeometry)val;
+            else
+            {
+                bindVar = (BindValue)val;
+                isBind = true;
+                Geometry = new NuiGeometry(-1, -1, 300, 300);
+            }
         }
     }
 }

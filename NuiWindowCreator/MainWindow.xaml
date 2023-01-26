@@ -261,6 +261,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition />
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -268,10 +269,12 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Label Content="{Binding Name}" Grid.ColumnSpan="2"/>
-                    <CheckBox VerticalAlignment="Center" x:Name="isBindColorCheck" IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
+                    <CheckBox VerticalAlignment="Center" x:Name="isBindColorCheck" 
+                              IsChecked="{Binding IsBind}" Content="bind?" Grid.Row="1"/>
                     <TextBox Text="{Binding BindVar}" 
                          IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked}" 
                          Grid.Row="1" Grid.Column="1"/>
+                    <Button Content="x" Tag="{Binding}" Click="buttonClearColorValue" Grid.Column="3"/>
                     <Grid Grid.Row="2" Grid.ColumnSpan="2"
                             IsEnabled="{Binding ElementName=isBindColorCheck, Path=IsChecked, Converter={StaticResource converterInvertBool}}">
                         <Grid.ColumnDefinitions>

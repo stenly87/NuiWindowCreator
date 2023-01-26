@@ -461,6 +461,12 @@ namespace NuiWindowCreator
             property.Value = null;
         }
 
+        private void buttonClearColorValue(object sender, RoutedEventArgs e)
+        {
+            NuiBindColorProperty property = (NuiBindColorProperty)((Button)sender).Tag;
+            property.Clear();
+        }
+
         private void buttonClearBoolValue(object sender, RoutedEventArgs e)
         {
             NuiBindBoolNullableProperty property = (NuiBindBoolNullableProperty)((Button)sender).Tag;

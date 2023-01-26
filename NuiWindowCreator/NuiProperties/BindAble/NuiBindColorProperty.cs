@@ -1,4 +1,5 @@
 ﻿using NuiWindowCreator.NuiElements;
+using System;
 using System.Reflection;
 
 namespace NuiWindowCreator.NuiProperties
@@ -18,54 +19,59 @@ namespace NuiWindowCreator.NuiProperties
                 isBind = value;
                 fieldInfo.SetValue(nuiElement, isBind ? (object)bindVar : Color);
                 SignalChanged(nameof(BindVar));
+                SignalChanged(nameof(IsBind));
             }
         }
 
         public string BindVar
         {
             get => bindVar.bind;
-            set => bindVar.bind = value;
+            set
+            {
+                bindVar.bind = value;
+                SignalChanged();
+            }
         }
         private BindValue bindVar = new BindValue { bind = "bind_color" };
         public string Name { get => fieldInfo.Name; }
         NuiColor Color;
 
-        public byte A
+        public byte? A
         {
-            get => Color.a;
+            get => Color?.a;
             set
             {
-                Color.a = value;
+                Color.a = (byte)value;
                 fieldInfo.SetValue(nuiElement, Color);
                 SignalChanged();
             }
         }
-        public byte R
+        public byte? R
         {
-            get => Color.r;
+            get => Color?.r;
             set
             {
-                Color.r = value;
+                Color.r = (byte)value;
                 fieldInfo.SetValue(nuiElement, Color);
                 SignalChanged();
             }
         }
-        public byte G
+        public byte? G
         {
-            get => Color.g;
+            get => Color?.g;
             set
             {
-                Color.g = value;
+                Color.g = (byte)value;
                 fieldInfo.SetValue(nuiElement, Color);
                 SignalChanged();
             }
         }
-        public byte B
+        public byte? B
         {
-            get => Color.b;
+            get => Color?.b;
             set
             {
-                Color.b = value;
+                Color.b = (byte)value;
                 fieldInfo.SetValue(nuiElement, Color);
                 SignalChanged();
             }
@@ -75,15 +81,23 @@ namespace NuiWindowCreator.NuiProperties
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
+            Color = new NuiColor();
             if (fieldInfo.GetValue(nuiElement) != null)
             {
                 if (fieldInfo.GetValue(nuiElement) is BindValue bind)
+                {
                     bindVar = bind;
+                    IsBind = true;
+                }
                 else
                     Color = (NuiColor)fieldInfo.GetValue(nuiElement);
             }
-            else
-                Color = new NuiColor();
+        }
+
+        internal void Clear()
+        {
+            Color = null;
+            IsBind = false;
         }
     }
 }

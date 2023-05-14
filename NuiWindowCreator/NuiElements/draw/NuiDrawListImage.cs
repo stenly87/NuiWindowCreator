@@ -23,9 +23,9 @@ namespace NuiWindowCreator.NuiElements
         public NuiDrawListImage()
         {
             type = 5;
-            color = null;
             fill = null;
             line_thickness = null;
+            color = new NuiColor();
             rect = new NuiGeometry(0, 0, 10, 10);
             image_aspect = NuiAspect.FILL;
             image_halign = NuiHAlign.CENTER;

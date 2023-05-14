@@ -11,8 +11,8 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindColorProperty))]
         [NuiBindable(typeof(NuiColor))]
         public object color;
-        [GuiProperty(typeof(NuiBindBoolProperty))]
-        [NuiBindable(typeof(bool))]
+        [GuiProperty(typeof(NuiBindBoolObjectNullableProperty))]
+        [NuiBindable(typeof(bool?))]
         public object fill;
         [GuiProperty(typeof(NuiBindFloatProperty))]
         [NuiBindable(typeof(float))]

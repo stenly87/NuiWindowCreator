@@ -147,6 +147,20 @@
                 <Button Content="x" Tag="{Binding}" Click="buttonClearBoolValue" Grid.Column="3"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiBindBoolObjectNullableProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}"/>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
+                <Button Content="x" Tag="{Binding}" Click="buttonClearBoolValue" Grid.Column="3"/>
+            </Grid>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type nui:NuiBindBoolProperty}">
             <Grid>
                 <Grid.ColumnDefinitions>

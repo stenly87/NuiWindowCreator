@@ -11,4 +11,13 @@ namespace NuiWindowCreator.NuiProperties
 
         }
     }
+
+    [JsonBindString("JsonBool()")]
+    public class NuiBindBoolObjectNullableProperty : NuiBindProperty<object>
+    {
+        public NuiBindBoolObjectNullableProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
+        {
+
+        }
+    }
 }

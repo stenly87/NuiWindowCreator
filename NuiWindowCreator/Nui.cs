@@ -19,6 +19,7 @@ namespace NuiWindowCreator
                     Formatting = Formatting.Indented,
                     NullValueHandling = NullValueHandling.Ignore
                 });
+            result = result.Replace("\"fill\": {}", "\"fill\": null,\"line_thickness\": null");
             if (!result.Contains("\"collapsed\":"))
             {
                 result = result.Insert(1, "\n\"collapsed\": null,");

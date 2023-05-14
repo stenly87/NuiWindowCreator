@@ -406,10 +406,19 @@ namespace NuiWindowCreator
 
         private void UpdateListTemplatesWidth(INui root)
         {
+            if (root is NuiElement element)
+            {
+                if (element.draw_list != null)
+                    foreach (var item in element.draw_list)
+                        if (item is NuiDrawListText || item is NuiDrawListImage)
+                        {
+                            ((NuiDrawListItem)item).fill = new object();
+                        }
+            }
             if (root is IHaveChildrens parent)
             {
                 foreach (var item in parent.children)
-                {
+                {                    
                     UpdateListTemplatesWidth(item);
                 }
             }

@@ -9,6 +9,9 @@ namespace NuiWindowCreator.NuiElements
         public bool multiline = true;
         [GuiProperty(typeof(NuiSimpleIntProperty))]
         public int max = 65535;
+        [GuiProperty(typeof(NuiSimpleBoolProperty))]
+        public bool wordwrap = true;
+        
         public NuiTextEdit()
         {
             type = "textedit";

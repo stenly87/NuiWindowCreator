@@ -31,11 +31,15 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindGeometryProperty))]
         [NuiBindable(typeof(NuiGeometry))]
         public object geometry;
+        [GuiProperty(typeof(NuiBindBoolProperty))]
+        [NuiBindable(typeof(bool))]
+        public object accepts_input;
 
         public NuiWindow()
         {
             geometry = new NuiGeometry(-1, -1, 300, 300);
             title = "caption window";
+            accepts_input = true;
             border = true;
             closable = true;
             collapsed = null;

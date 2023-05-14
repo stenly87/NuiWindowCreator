@@ -17,6 +17,11 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindFloatProperty))]
         [NuiBindable(typeof(float))]
         public object line_thickness;
+        [GuiProperty(typeof(NuiSimpleIntProperty))]
+        public int order = 1;
+        [GuiProperty(typeof(NuiSimpleIntProperty))]
+        public int render = 0;
+
         [NuiIgnoreProperty]
         public int type;
 

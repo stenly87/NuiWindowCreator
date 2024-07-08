@@ -174,7 +174,8 @@ namespace NuiWindowCreator
             else
                 return;
             SelectedElement.Items.Add(paste);
-            paste = null;
+            paste = (CustomTreeViewItem)paste.Clone();
+            ReloadTree();
         }
         CustomTreeViewItem paste;
         private void MenuCopy_Click(object sender, RoutedEventArgs e)

@@ -15,7 +15,7 @@ namespace NuiWindowCreator
         {
             string result = JsonConvert.SerializeObject(window,
                 new JsonSerializerSettings
-                {
+                {   
                     Formatting = Formatting.Indented,
                     NullValueHandling = NullValueHandling.Ignore
                 });

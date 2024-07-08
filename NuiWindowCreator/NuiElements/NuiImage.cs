@@ -15,6 +15,10 @@ namespace NuiWindowCreator.NuiElements
         [NuiBindable(typeof(NuiVAlign))]
         public object image_valign;
 
+        [GuiProperty(typeof(NuiBindGeometryProperty))]
+        [NuiBindable(typeof(NuiGeometry))]
+        public object image_region;
+
         public NuiImage()
         {
             type = "image";

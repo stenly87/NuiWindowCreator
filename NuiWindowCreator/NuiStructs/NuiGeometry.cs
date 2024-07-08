@@ -1,4 +1,6 @@
-﻿namespace NuiWindowCreator.NuiElements
+﻿using System;
+
+namespace NuiWindowCreator.NuiElements
 {
     [System.Serializable]
     public class NuiGeometry : NuiStruct
@@ -14,6 +16,11 @@
             this.y = y;
             this.h = h;
             this.w = w;
+        }
+
+        internal bool IsZero()
+        {
+            return x == 0 && y == 0 && h == 0 && w == 0;
         }
     }
 }

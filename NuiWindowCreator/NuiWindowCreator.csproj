@@ -86,6 +86,10 @@
     <Compile Include="NuiElements\draw\NuiDrawListCurve.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListImage.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListText.cs" />
+    <Compile Include="NuiElements\NuiChart.cs" />
+    <Compile Include="NuiElements\NuiChartSlot.cs" />
+    <Compile Include="NuiElements\NuiSliderFloat.cs" />
+    <Compile Include="NuiElements\NuiToggles.cs" />
     <Compile Include="NuiProperties\BindAble\NuiArrayFloatPairsSelectProperty.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListItem.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListPolyLine.cs" />

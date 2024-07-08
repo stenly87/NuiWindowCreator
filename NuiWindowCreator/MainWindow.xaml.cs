@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -22,6 +23,8 @@ namespace NuiWindowCreator
     {
         static ContextMenu contextMenu = new ContextMenu();
         static ContextMenu contextMenuSmall = new ContextMenu();
+        static ContextMenu contextMenuChart = new ContextMenu();
+        static ContextMenu contextMenuChartSlot = new ContextMenu();
         public string Json
         {
             get => json;
@@ -76,8 +79,8 @@ namespace NuiWindowCreator
 
             var variants = new string[] { "NuiCol", "NuiRow", "NuiGroup",
                 "NuiSpacer", "NuiLabel", "NuiText", "NuiButton", "NuiButtonImage", "NuiButtonSelect",
-                "NuiCheck", "NuiImage" , "NuiCombo", "NuiSlider","NuiProgress","NuiTextEdit",
-                "NuiList", "NuiColorPicker", "NuiOptions"
+                "NuiCheck", "NuiImage" , "NuiCombo", "NuiSlider","NuiSliderFloat","NuiProgress","NuiTextEdit",
+                "NuiList", "NuiColorPicker", "NuiOptions", "NuiToggles", "NuiChart"
             };
 
             foreach (var v in variants)
@@ -125,10 +128,8 @@ namespace NuiWindowCreator
                 menuAdd.Items.Add(menu);
             }
             contextMenuSmall.Items.Add(menuAdd);
-            var menuItem = CreateMenuVisual();
-            contextMenu.Items.Add(menuItem);
-            menuItem = CreateMenuVisual();
-            contextMenuSmall.Items.Add(menuItem);
+            contextMenu.Items.Add(CreateMenuVisual());
+            contextMenuSmall.Items.Add(CreateMenuVisual());
 
             var menuRemove = new MenuItem { Header = "Remove element" };
             menuRemove.Click += MenuRemove_Click;
@@ -136,6 +137,23 @@ namespace NuiWindowCreator
             menuRemove = new MenuItem { Header = "Remove element" };
             menuRemove.Click += MenuRemove_Click;
             contextMenuSmall.Items.Add(menuRemove);
+
+            var menuChart = new MenuItem { Header = "Add chart slot" };
+            menuChart.Click += MenuAddChartSlot_Click;
+            contextMenuChart.Items.Add(menuChart);
+            menuAdd = new MenuItem { Header = "Pack to container" };
+            variants = new string[] { "NuiCol", "NuiRow", "NuiGroup" };
+            foreach (var v in variants)
+            {
+                var menu = new MenuItem { Header = v };
+                menu.Click += MenuPack_Click;
+                menuAdd.Items.Add(menu);
+            }
+            contextMenuChart.Items.Add(menuAdd);
+            contextMenuChart.Items.Add(CreateMenuVisual());
+            var menuChart2 = new MenuItem { Header = "Remove chart slot" };
+            menuChart2.Click += MenuRemoveChartSlot_Click;
+            contextMenuChartSlot.Items.Add(menuChart2);
         }
 
         private MenuItem CreateMenuVisual()
@@ -376,12 +394,35 @@ namespace NuiWindowCreator
             AddNode(SelectedElement, element);
         }
 
+        private void MenuRemoveChartSlot_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement.NuiElement is NuiChartSlot slot)
+            {
+                var parent = (CustomTreeViewItem)SelectedElement.Parent;
+
+                if (parent.NuiElement is NuiChart chart)
+                {
+                    chart.RemoveChildren(SelectedElement.NuiElement);
+                    parent.Items.Remove(SelectedElement);
+                }
+            }
+        }
+
+        private void MenuAddChartSlot_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedElement.NuiElement is NuiChart chart)
+            {
+                var slot = chart.AddChildren();
+                AddNode(SelectedElement, slot);
+            }
+        }
+
         private CustomTreeViewItem AddNode(CustomTreeViewItem selectedElement, INui element)
         {
             var node = new CustomTreeViewItem
             {
                 Header = element.GetType().Name,
-                ContextMenu = element is IHaveChildrens || element is NuiList ? contextMenu : contextMenuSmall,
+                ContextMenu = element is NuiChartSlot ? contextMenuChartSlot : (element is NuiChart ? contextMenuChart :  (element is IHaveChildrens || element is NuiList ? contextMenu : contextMenuSmall)),
                 NuiElement = element,
                 IsExpanded = true
             };
@@ -398,6 +439,10 @@ namespace NuiWindowCreator
 
         private void ClickShowJson(object sender, RoutedEventArgs e)
         {
+            if (nui.edge_constraint is NuiGeometry g && g.IsZero())
+                nui.edge_constraint = null;
+            if (nui.size_constraint is NuiGeometry s && s.IsZero())
+                nui.size_constraint = null;
             UpdateListTemplatesWidth(nui.root);
             Json = Nui.GetJsonFromWindow((NuiWindow)Elements.First().NuiElement);
             List<string> binds = new List<string>();
@@ -419,7 +464,7 @@ namespace NuiWindowCreator
             if (root is IHaveChildrens parent)
             {
                 foreach (var item in parent.children)
-                {                    
+                {
                     UpdateListTemplatesWidth(item);
                 }
             }
@@ -444,7 +489,7 @@ namespace NuiWindowCreator
                         if (jsonValueString != null)
                             json = ((JsonBindStringAttribute)jsonValueString).Value;
                         binds.Add($"NuiSetBind(oPC, nToken, \"{isBindValue.GetValue(prop)}\", {json});");
-                    }                    
+                    }
                 }
             }
             foreach (CustomTreeViewItem item in customTreeViewItem.Items)
@@ -575,6 +620,13 @@ namespace NuiWindowCreator
                 {
                     var nextNode = AddNode(rootNode, item);
                     BuildTree(item, nextNode);
+                }
+            }
+            else if (root is NuiChart chart)
+            {
+                foreach (INui item in chart.value)
+                {
+                    AddNode(rootNode, item);
                 }
             }
         }

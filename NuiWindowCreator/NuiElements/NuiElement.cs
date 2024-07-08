@@ -21,6 +21,9 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindStringProperty))]
         [NuiBindable(typeof(string))]
         public object tooltip;
+        [GuiProperty(typeof(NuiBindStringProperty))]
+        [NuiBindable(typeof(string))]
+        public object disabled_tooltip;
 
         [GuiProperty(typeof(NuiSimpleNullableFloatProperty))]
         public float? width;
@@ -39,6 +42,14 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindBoolNullableProperty))]
         [NuiBindable(typeof(bool?))]
         public object visible;
+
+        [GuiProperty(typeof(NuiBindStringProperty))]
+        [NuiBindable(typeof(string))]
+        public object font;
+
+        [GuiProperty(typeof(NuiBindBoolNullableProperty))]
+        [NuiBindable(typeof(bool?))]
+        public object encouraged;
 
         [GuiProperty(typeof(NuiBindColorProperty))]
         [NuiBindable(typeof(NuiColor))]

@@ -15,9 +15,13 @@ namespace NuiWindowCreator.NuiElements
         public object row_count = new BindValue { bind = "list_row_count" };
         [GuiProperty(typeof(NuiSimpleFloatProperty))]
         public float row_height = 25.0f;
+        [GuiProperty(typeof(NuiScrollSelectProperty))]
+        public NuiScrollbars scrollbars;
+
         public NuiList()
         {
             type = "list";
+            scrollbars = NuiScrollbars.Y;
         }
 
         internal void AddTemplateCell(INui nuiElement)
@@ -70,3 +74,4 @@ namespace NuiWindowCreator.NuiElements
         }
     }
 }
+

@@ -35,6 +35,16 @@ namespace NuiWindowCreator.NuiElements
         [NuiBindable(typeof(bool))]
         public object accepts_input;
 
+        [GuiProperty(typeof(NuiBindGeometryProperty))]
+        [NuiBindable(typeof(NuiGeometry))]
+        public object edge_constraint;
+        [GuiProperty(typeof(NuiBindGeometryProperty))]
+        [NuiBindable(typeof(NuiGeometry))]
+        public object size_constraint;
+        [GuiProperty(typeof(NuiBindStringProperty))]
+        [NuiBindable(typeof(string))]
+        public object font;
+
         public NuiWindow()
         {
             geometry = new NuiGeometry(-1, -1, 300, 300);

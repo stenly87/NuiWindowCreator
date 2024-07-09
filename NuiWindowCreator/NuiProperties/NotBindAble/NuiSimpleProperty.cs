@@ -20,7 +20,7 @@ namespace NuiWindowCreator.NuiProperties
             }
         }
 
-        public NuiSimpleProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiSimpleProperty(FieldInfo fieldInfo, INui nuiElement, string description) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

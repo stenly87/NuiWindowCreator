@@ -8,7 +8,7 @@ namespace NuiWindowCreator.NuiProperties
 {
     public class NuiScrollSelectProperty : NuiEnumSelectProperty<NuiScrollbars>
     {
-        public NuiScrollSelectProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
+        public NuiScrollSelectProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(fieldInfo, nuiElement, description)
         {
         }
     }

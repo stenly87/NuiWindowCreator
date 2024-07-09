@@ -5,8 +5,8 @@ namespace NuiWindowCreator.NuiProperties
 {
     public class NuiSimpleBoolProperty : NuiSimpleProperty<bool>
     {
-        public NuiSimpleBoolProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
-        {
+        public NuiSimpleBoolProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(fieldInfo, nuiElement, description)
+        { 
 
         }
     }

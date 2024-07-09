@@ -92,7 +92,7 @@ namespace NuiWindowCreator
 
             contextMenu.Items.Add(menuAdd);
             menuAdd = new MenuItem { Header = "Add Draw element" };
-            variants = new string[] { "NuiDrawListPolyLine", "NuiDrawListCurve", "NuiDrawListCircle", "NuiDrawListArc", "NuiDrawListText", "NuiDrawListImage" };
+            variants = new string[] { "NuiDrawListPolyLine", "NuiDrawListCurve", "NuiDrawListCircle", "NuiDrawListArc", "NuiDrawListText", "NuiDrawListImage", "NuiDrawListLine", "NuiDrawListRect" };
             foreach (var v in variants)
             {
                 var menu = new MenuItem { Header = v };
@@ -101,7 +101,7 @@ namespace NuiWindowCreator
             }
             contextMenu.Items.Add(menuAdd);
             menuAdd = new MenuItem { Header = "Add Draw element" };
-            variants = new string[] { "NuiDrawListPolyLine", "NuiDrawListCurve", "NuiDrawListCircle", "NuiDrawListArc", "NuiDrawListText", "NuiDrawListImage" };
+            variants = new string[] { "NuiDrawListPolyLine", "NuiDrawListCurve", "NuiDrawListCircle", "NuiDrawListArc", "NuiDrawListText", "NuiDrawListImage", "NuiDrawListLine", "NuiDrawListRect" };
             foreach (var v in variants)
             {
                 var menu = new MenuItem { Header = v };

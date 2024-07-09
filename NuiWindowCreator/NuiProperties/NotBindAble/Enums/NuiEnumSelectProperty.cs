@@ -22,7 +22,7 @@ namespace NuiWindowCreator.NuiProperties
         private FieldInfo fieldInfo;
         private INui nuiElement;
 
-        public NuiEnumSelectProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiEnumSelectProperty(FieldInfo fieldInfo, INui nuiElement, string description) : base(description)
         {
             Values = Enum.GetValues(typeof(T)).
                 AsQueryable().

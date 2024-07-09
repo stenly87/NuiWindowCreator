@@ -44,7 +44,7 @@ namespace NuiWindowCreator.NuiProperties
         private INui nuiElement;
         private T notBindValue;
 
-        public NuiBindEnumSelectProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiBindEnumSelectProperty(FieldInfo fieldInfo, INui nuiElement, string description) : base(description)
         {
             Values = Enum.GetValues(typeof(T)).
                 AsQueryable().

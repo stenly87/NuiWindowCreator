@@ -6,7 +6,7 @@ namespace NuiWindowCreator.NuiProperties
     [JsonBindString("JsonBool()")]
     public class NuiBindBoolProperty : NuiBindProperty<bool>
     {
-        public NuiBindBoolProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
+        public NuiBindBoolProperty(FieldInfo fieldInfo, INui nuiElement, string description = null): base(fieldInfo, nuiElement, description)
         {
 
         }

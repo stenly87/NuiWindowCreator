@@ -12,7 +12,7 @@ namespace NuiWindowCreator.NuiProperties
         public string Name { get => fieldInfo.Name; set { } }
         public T Value { get => throw new Exception(); set { } }
 
-        public ErrorProperty(FieldInfo fieldInfo, INui nuiElement)
+        public ErrorProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

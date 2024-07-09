@@ -47,7 +47,7 @@ namespace NuiWindowCreator.NuiProperties
         private List<float> localValue;
         private ObservableCollection<FloatPair> values = new ObservableCollection<FloatPair>();
 
-        public NuiArrayFloatPairsSelectProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiArrayFloatPairsSelectProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

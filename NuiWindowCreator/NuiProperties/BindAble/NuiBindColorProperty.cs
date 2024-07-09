@@ -77,7 +77,7 @@ namespace NuiWindowCreator.NuiProperties
             }
         }
 
-        public NuiBindColorProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiBindColorProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

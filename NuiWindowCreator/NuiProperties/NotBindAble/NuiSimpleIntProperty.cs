@@ -5,7 +5,7 @@ namespace NuiWindowCreator.NuiProperties
 {
     public class NuiSimpleIntProperty : NuiSimpleProperty<int>
     {
-        public NuiSimpleIntProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
+        public NuiSimpleIntProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(fieldInfo, nuiElement, description)
         {
 
         }

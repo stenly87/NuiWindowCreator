@@ -67,7 +67,7 @@ namespace NuiWindowCreator.NuiProperties
             }
         }
 
-        public NuiBindProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiBindProperty(FieldInfo fieldInfo, INui nuiElement, string description) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

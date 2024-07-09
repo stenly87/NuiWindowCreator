@@ -19,7 +19,7 @@ namespace NuiWindowCreator.NuiProperties
             if (GuiProperty.Length > 0)
             {
                 GuiPropertyAttribute guiProperty = (GuiPropertyAttribute)GuiProperty.First();
-                return (NuiProperty)Activator.CreateInstance(guiProperty.TargetType, new object[] { fieldInfo, nuiElement });
+                return (NuiProperty)Activator.CreateInstance(guiProperty.TargetType, new object[] { fieldInfo, nuiElement, guiProperty.Description });
             }
             return new ErrorProperty<string>(fieldInfo, nuiElement);
         }

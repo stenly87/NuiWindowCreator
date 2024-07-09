@@ -85,6 +85,8 @@
     <Compile Include="NuiElements\draw\NuiDrawListCircle.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListCurve.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListImage.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListLine.cs" />
+    <Compile Include="NuiElements\draw\NuiDrawListRect.cs" />
     <Compile Include="NuiElements\draw\NuiDrawListText.cs" />
     <Compile Include="NuiElements\NuiChart.cs" />
     <Compile Include="NuiElements\NuiChartSlot.cs" />

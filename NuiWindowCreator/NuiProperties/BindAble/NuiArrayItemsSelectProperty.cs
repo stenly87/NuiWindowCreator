@@ -45,7 +45,7 @@ namespace NuiWindowCreator.NuiProperties
         private List<string> localValue;
         private ObservableCollection<StringEntry> values = new ObservableCollection<StringEntry>();
 
-        public NuiArrayItemsSelectProperty(FieldInfo fieldInfo, INui nuiElement)
+        public NuiArrayItemsSelectProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

@@ -6,7 +6,7 @@ namespace NuiWindowCreator.NuiProperties
     [JsonBindString("JsonInt()")]
     public class NuiAspectSelectProperty : NuiBindEnumSelectProperty<NuiAspect>
     {
-        public NuiAspectSelectProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
+        public NuiAspectSelectProperty(FieldInfo fieldInfo, INui nuiElement, string description) : base(fieldInfo, nuiElement, description)
         {
         }
     }

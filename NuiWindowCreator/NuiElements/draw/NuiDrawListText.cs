@@ -11,6 +11,10 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiBindStringProperty))]
         [NuiBindable(typeof(string))]
         public object text;
+        [GuiProperty(typeof(NuiBindStringProperty))]
+        [NuiBindable(typeof(string))]
+        public object font;
+
         public NuiDrawListText()
         {
             type = 4;

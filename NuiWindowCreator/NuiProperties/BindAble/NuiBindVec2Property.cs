@@ -50,7 +50,7 @@ namespace NuiWindowCreator.NuiProperties
             }
         }
 
-        public NuiBindVec2Property(FieldInfo fieldInfo, INui nuiElement)
+        public NuiBindVec2Property(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(description)
         {
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;

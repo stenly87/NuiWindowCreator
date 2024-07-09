@@ -5,7 +5,7 @@ namespace NuiWindowCreator.NuiProperties
 {
     internal class NuiSimpleFloatProperty : NuiSimpleProperty<float>
     {
-        public NuiSimpleFloatProperty(FieldInfo fieldInfo, INui nuiElement) : base(fieldInfo, nuiElement)
+        public NuiSimpleFloatProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(fieldInfo, nuiElement, description)
         {
 
         }

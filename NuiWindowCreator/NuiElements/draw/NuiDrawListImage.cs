@@ -20,6 +20,10 @@ namespace NuiWindowCreator.NuiElements
         [GuiProperty(typeof(NuiVAlignSelectProperty))]
         [NuiBindable(typeof(NuiVAlign))]
         public object image_valign;
+        [GuiProperty(typeof(NuiBindGeometryProperty))]
+        [NuiBindable(typeof(NuiGeometry))]
+        public object image_region; 
+
         public NuiDrawListImage()
         {
             type = 5;

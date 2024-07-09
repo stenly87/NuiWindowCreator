@@ -7,7 +7,7 @@ namespace NuiWindowCreator.NuiElements
     {
         [GuiProperty(typeof(NuiSimpleBoolProperty))]
         public bool multiline = true;
-        [GuiProperty(typeof(NuiSimpleIntProperty))]
+        [GuiProperty(typeof(NuiSimpleIntProperty), "UInt >= 1, <= 65535")]
         public int max = 65535;
         [GuiProperty(typeof(NuiSimpleBoolProperty))]
         public bool wordwrap = true;

@@ -6,7 +6,7 @@ namespace NuiWindowCreator.NuiElements
     [System.Serializable]
     public class NuiDrawListPolyLine : NuiDrawListItem
     {
-        [GuiProperty(typeof(NuiArrayFloatPairsSelectProperty))]
+        [GuiProperty(typeof(NuiArrayFloatPairsSelectProperty), "Always provide points in pairs")]
         [NuiBindable(typeof(List<float>))]
         public object points;
         public NuiDrawListPolyLine()

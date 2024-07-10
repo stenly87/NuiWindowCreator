@@ -197,6 +197,21 @@
                 <TextBox Text="{Binding Value}" Grid.Column="2"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type nui:NuiBindFloatNullableProperty}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="65"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Name}" ToolTip="{Binding Description}"/>
+                <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsBind}" Content="bind?" Grid.Column="1"/>
+                <TextBox Text="{Binding Value}" Grid.Column="2"/>
+                <Button Content="x" Tag="{Binding}" Click="buttonClearFloatNullValue" Grid.Column="3"/>
+            </Grid>
+        </DataTemplate>
+       
         <DataTemplate DataType="{x:Type nui:NuiBindVec2Property}">
             <Border BorderThickness="1" BorderBrush="WhiteSmoke">
                 <Grid>

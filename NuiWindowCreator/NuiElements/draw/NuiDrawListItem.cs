@@ -5,17 +5,17 @@ namespace NuiWindowCreator.NuiElements
     [System.Serializable]
     public class NuiDrawListItem : INui
     {
-        [GuiProperty(typeof(NuiBindBoolProperty))]
-        [NuiBindable(typeof(bool))]
+        [GuiProperty(typeof(NuiBindBoolNullableProperty))]
+        [NuiBindable(typeof(bool?))]
         public object enabled;
-        [GuiProperty(typeof(NuiBindColorProperty))]
+        [GuiProperty(typeof(NuiBindColorProperty), "Must be Null for NuiDrawListImage")]
         [NuiBindable(typeof(NuiColor))]
         public object color;
-        [GuiProperty(typeof(NuiBindBoolProperty))]
-        [NuiBindable(typeof(bool))]
+        [GuiProperty(typeof(NuiBindBoolNullableProperty), "Bool. Must be Null for NuiDrawListImage, NuiDrawListText. False for NuiDrawListCurve")]
+        [NuiBindable(typeof(bool?))]
         public object fill;
-        [GuiProperty(typeof(NuiBindFloatProperty))]
-        [NuiBindable(typeof(float))]
+        [GuiProperty(typeof(NuiBindFloatNullableProperty), "Float. Must be Null for NuiDrawListImage, NuiDrawListText.")]
+        [NuiBindable(typeof(float?))]
         public object line_thickness;
         [GuiProperty(typeof(NuiSimpleIntProperty), "You can order draw list items to be painted either before, or after the\r\nbuiltin render of the widget in question. This enables you to paint \"behind\" a widget.\r\nBEFORE = -1\r\nAFTER = 1")]
         public int order = 1;

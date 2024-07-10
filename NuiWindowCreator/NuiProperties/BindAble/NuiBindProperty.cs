@@ -80,12 +80,14 @@ namespace NuiWindowCreator.NuiProperties
                     isBind = true;
                     bindValue = (BindValue)fieldInfo.GetValue(nuiElement);
                 }
-                else
+                else if (fieldInfo.GetValue(nuiElement) is T)
                     localValue = (T)fieldInfo.GetValue(nuiElement);
+                else
+                    localValue = default(T);
             }
             else
             {
-                bindValue = new BindValue();
+                //bindValue = new BindValue();
                 localValue = default(T);
             }
         }

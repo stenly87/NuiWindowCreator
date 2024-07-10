@@ -458,7 +458,10 @@ namespace NuiWindowCreator
                     foreach (var item in element.draw_list)
                         if (item is NuiDrawListText || item is NuiDrawListImage)
                         {
-                            ((NuiDrawListItem)item).fill = new object();
+                            if (((NuiDrawListItem)item).fill == null)
+                                ((NuiDrawListItem)item).fill = new object();
+                            if (((NuiDrawListItem)item).line_thickness == null)
+                                ((NuiDrawListItem)item).line_thickness = new object();
                         }
             }
             if (root is IHaveChildrens parent)
@@ -525,6 +528,12 @@ namespace NuiWindowCreator
         private void buttonClearBoolValue(object sender, RoutedEventArgs e)
         {
             NuiBindBoolNullableProperty property = (NuiBindBoolNullableProperty)((Button)sender).Tag;
+            property.Value = null;
+        }
+
+        private void buttonClearFloatNullValue(object sender, RoutedEventArgs e)
+        {
+            NuiBindFloatNullableProperty property = (NuiBindFloatNullableProperty)((Button)sender).Tag;
             property.Value = null;
         }
 

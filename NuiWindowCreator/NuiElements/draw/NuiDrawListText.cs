@@ -21,6 +21,7 @@ namespace NuiWindowCreator.NuiElements
             fill = null;
             line_thickness = null;
             rect = new NuiGeometry(0, 0, 10, 10);
+            text = "your text here";
         }
     }
 }

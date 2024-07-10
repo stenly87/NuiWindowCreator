@@ -11,4 +11,13 @@ namespace NuiWindowCreator.NuiProperties
 
         }
     }
+
+    [JsonBindString("JsonFloat()")]
+    public class NuiBindFloatNullableProperty : NuiBindProperty<float?>
+    {
+        public NuiBindFloatNullableProperty(FieldInfo fieldInfo, INui nuiElement, string description = null) : base(fieldInfo, nuiElement, description)
+        {
+
+        }
+    }
 }

@@ -55,7 +55,17 @@ namespace NuiWindowCreator.NuiProperties
             this.fieldInfo = fieldInfo;
             this.nuiElement = nuiElement;
 
-            Vector = (NuiVec2)fieldInfo.GetValue(nuiElement);
+            var val = fieldInfo.GetValue(nuiElement);
+            if (val is BindValue bind)
+            {
+                BindVar = bind.bind;
+                isBind = true;
+                Vector = new NuiVec2();
+            }
+            else
+            {
+                Vector = (NuiVec2)val;
+            }
         }
     }
 }
